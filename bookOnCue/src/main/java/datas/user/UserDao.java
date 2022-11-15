@@ -39,7 +39,7 @@ public class UserDao {
 //	4.delete
 //	필요한 지우기.
 
-	private int getMaxId() {
+	public int getMaxId() {
 		int id = 0;
 		String sql = "select MAX(id) from user";
 
@@ -66,23 +66,25 @@ public class UserDao {
 	}
 
 	public void createUser(UserDto userDto) {
-		String sql = "INSERT INTO `user`(`id`,`user`,`password`,`name`,nickname,`address`, phone) VALUES(?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO `user`(`id`,`user`,`password`,`name`,phone,`address`, nickname) VALUES(?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			this.conn = DBManager.getConnection();
 			this.pstmt = this.conn.prepareStatement(sql);
 
-			this.pstmt.setInt(1, getMaxId());
+			this.pstmt.setLong(1, userDto.getId());
 			this.pstmt.setString(2, userDto.getUser());
 			this.pstmt.setString(3, userDto.getPassword());
 			this.pstmt.setString(4, userDto.getName());
-			this.pstmt.setString(5, userDto.getNickname());
+			this.pstmt.setString(5, userDto.getPhone());
 			this.pstmt.setString(6, userDto.getAddress());
-			this.pstmt.setString(7, userDto.getPhone());
+			this.pstmt.setString(7, userDto.getNickname());
 
 			this.pstmt.execute();
+			System.out.println("가입성공!");
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("가입실패!");
 		} finally {
 			try {
 				pstmt.close();
@@ -129,14 +131,16 @@ public class UserDao {
 		return list;
 	}
 
-	public UserDto readUserById(String user) {
+	
+	
+	public UserDto readUserById(String userid) {
 
 		UserDto userDto = null;
-		String sql = "select * From `user` where 'user'=?";
+		String sql = "select * from `user` where `user`=?";
 		try {
 			this.conn = DBManager.getConnection();
 			this.pstmt = conn.prepareStatement(sql);
-			this.pstmt.setString(1, user);
+			this.pstmt.setString(1, userid);
 			this.rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -149,7 +153,7 @@ public class UserDao {
 				Timestamp regdate = rs.getTimestamp(8);
 				boolean manager = rs.getBoolean(9);
 
-				userDto = new UserDto(id, user, password, name, phone, nickname, regdate, manager);
+				userDto = new UserDto(id, userid, password, name, phone, address, nickname, regdate, manager);
 			}
 
 		} catch (Exception e) {
@@ -165,6 +169,69 @@ public class UserDao {
 		return userDto;
 	}
 
+	//모든 아이디를 불러오는 것.
+	public ArrayList<String> getAllId() {
+
+		ArrayList<String> list = new ArrayList<>();
+		
+		String sql = "select `user`from `user`";
+		try {
+			this.conn = DBManager.getConnection();
+			this.pstmt = conn.prepareStatement(sql);
+			this.rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String user = rs.getString(1);
+
+				list.add(user);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	public ArrayList<String> getAllNickName() {
+
+		ArrayList<String> list = new ArrayList<>();
+		
+		String sql = "select nickname From `user`";
+		try {
+			this.conn = DBManager.getConnection();
+			this.pstmt = conn.prepareStatement(sql);
+			this.rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String user = rs.getString(1);
+
+				list.add(user);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	
+	
+	
+	
 	public void UpdateUserById(UserDto userDto) {
 		String user= userDto.getUser();
 		String password = userDto.getPassword();
@@ -201,6 +268,8 @@ public class UserDao {
 		}
 	}
 	
-	public 
+	public void deleteUser(String user) {
+		
+	}
 
 }

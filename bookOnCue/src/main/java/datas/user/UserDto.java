@@ -13,18 +13,18 @@ public class UserDto {
 	private Timestamp regdate;
 	private boolean manager;
 	
-	public UserDto(int id, String user, String password, String name, String nickname, String gender, String phone,
-			Timestamp regdate, boolean manager) {
+	public UserDto(int id, String user, String password, String name, String phone, String address, String nickname) {
 		super();
 		this.id = id;
 		this.user = user;
 		this.password = password;
 		this.name = name;
-		this.nickname = nickname;
 		this.phone = phone;		
+		this.address=address;
+		this.nickname = nickname;
 	}
 	
-	public UserDto(int id, String user, String password, String name, String nickname, String phone,
+	public UserDto(int id, String user, String password, String name, String phone, String address, String nickname,
 			Timestamp regdate, boolean manager) {
 		super();
 		this.id = id;
@@ -32,6 +32,7 @@ public class UserDto {
 		this.password = password;
 		this.name = name;
 		this.nickname = nickname;
+		this.address=address;
 		this.phone = phone;
 		this.regdate = regdate;
 		this.manager = manager;
