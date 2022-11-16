@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import util.data.DBManager;
+import datas.util.data.DBManager;
 
 public class UserDao {
 
