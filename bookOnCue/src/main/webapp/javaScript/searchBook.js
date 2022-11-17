@@ -35,7 +35,7 @@ console.log(word);
 			const isbn = e.isbn;
 			
 			const isbnarr = isbn.split(" ");
-			const isbnshort = isbnarr[0];
+			const isbnshort = isbnarr[1];
 			console.log(isbnshort);
             $(`.container`).append(
                 `<tr>
@@ -45,7 +45,7 @@ console.log(word);
                     <td>${author}</td>
                     <td>${publisher}</td>
                     <td>${price}</td>
-					<td>${isbn} ${isbnshort}</td>
+					<td>${isbnshort}</td>
                 </tr>`
             );
 

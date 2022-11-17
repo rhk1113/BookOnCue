@@ -53,7 +53,7 @@ public class BookDao {
 	}
 	//Create
 	public void createBook(BookDto bookDto) {
-		String sql = "INSERT INTO book values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO book values(?, ?, ?, ?, ?, ?, ?, ?)";
 		long id = getMaxId();
 		try {
 			this.conn=DBManager.getConnection();
@@ -66,7 +66,6 @@ public class BookDao {
 			this.pstmt.setInt(6,bookDto.getPrice());
 			this.pstmt.setString(7,bookDto.getUrl());
 			this.pstmt.setString(8,bookDto.getPublisher());
-			this.pstmt.setString(9,bookDto.getContents());
 			this.pstmt.execute();
 			System.out.println("책 등록 성공!");
 		}catch (Exception e) {
@@ -109,9 +108,8 @@ public class BookDao {
 				int price = rs.getInt(6);
 				String url = rs.getString(7);
 				String publisher = rs.getString(8);
-				String contents = rs.getString(9);
 				
-				list.add(new BookDto(id,title,author,isbn,img,price,url,publisher,contents));
+				list.add(new BookDto(id,title,author,isbn,img,price,url,publisher));
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -146,9 +144,8 @@ public class BookDao {
 			int price = rs.getInt(6);
 			String url = rs.getString(7);
 			String publisher = rs.getString(8);
-			String contents = rs.getString(9);
 			
-			bookDto = new BookDto(id, title, author, isbn, img, price, url, publisher, contents);
+			bookDto = new BookDto(id, title, author, isbn, img, price, url, publisher);
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

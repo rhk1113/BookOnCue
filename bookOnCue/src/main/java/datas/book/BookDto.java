@@ -9,9 +9,9 @@ public class BookDto {
 	private int price;
 	private String url;
 	private String publisher;
-	private String contents;
+
 	
-	public BookDto(long id, String title, String author, String isbn, String img, int price, String url, String publisher, String contents) {
+	public BookDto(long id, String title, String author, String isbn, String img, int price, String url, String publisher) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -21,7 +21,6 @@ public class BookDto {
 		this.price = price;
 		this.url = url;
 		this.publisher = publisher;
-		this.contents = contents;
 	}
 
 	public long getId() {
@@ -89,12 +88,5 @@ public class BookDto {
 		this.url = url;
 	}
 	
-	public String getContents() {
-		return contents;
-	}
-	
-	public void setContents(String contents) {
-		this.contents = contents;
-	}
 	
 }
