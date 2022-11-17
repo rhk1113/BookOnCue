@@ -10,7 +10,9 @@
 </head>
 <body>
 <%String query = request.getParameter("isbn");
-System.out.println(query);%>
+System.out.println(query);
+
+%>
     <div class ="container">
     </div>
     
