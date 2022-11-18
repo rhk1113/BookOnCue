@@ -23,7 +23,7 @@ String nickname = request.getParameter("nickname");
 String address = request.getParameter("address");
 String phone = request.getParameter("phone1")+request.getParameter("phone2")+request.getParameter("phone3");
 System.out.println(phone);
-userDto = new UserDto (no, id, password, name, nickname,address, phone);
+userDto = new UserDto (no, id, password, name, phone, address, nickname);
 userDao.createUser(userDto);
 
 response.sendRedirect("login.jsp");

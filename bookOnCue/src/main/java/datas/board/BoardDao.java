@@ -20,9 +20,9 @@ public class BoardDao {
 		this.rs=null;
 	}
 	
-	public static BoardDao instance = new BoardDao();
+	private static BoardDao instance = new BoardDao();
 	
-	public BoardDao getInstance() {
+	public static BoardDao getInstance() {
 		return instance;
 	}
 	public long getMaxNo() {
@@ -56,7 +56,7 @@ public class BoardDao {
 	
 	//Create
 	public void createBoard(BoardDto boardDto) {
-		String sql = "insert into board values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into board(no,division,title,text,user,isbn,strdate,enddate,isbook) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		long no = getMaxNo();
 		try {
 			this.conn = DBManager.getConnection();
@@ -67,10 +67,9 @@ public class BoardDao {
 			this.pstmt.setString(4,boardDto.getText());
 			this.pstmt.setString(5,boardDto.getUser());
 			this.pstmt.setString(6,boardDto.getIsbn());
-			this.pstmt.setTimestamp(7, boardDto.getRegdate());
-			this.pstmt.setTimestamp(8, boardDto.getModdate());
-			this.pstmt.setTimestamp(9, boardDto.getStrdate());
-			this.pstmt.setTimestamp(10, boardDto.getEnddate());
+			this.pstmt.setTimestamp(7, boardDto.getStrdate());
+			this.pstmt.setTimestamp(8, boardDto.getEnddate());
+			this.pstmt.setBoolean(9, boardDto.isIsbook());
 			System.out.println("작성글 등록 성공!");
 			this.pstmt.execute();
 		}catch(Exception e) {
@@ -117,8 +116,9 @@ public class BoardDao {
 				Timestamp moddate =rs.getTimestamp(8);
 				Timestamp strdate=rs.getTimestamp(9);
 				Timestamp enddate=rs.getTimestamp(10);
+				boolean isbook = rs.getBoolean(11);
 				
-				BoardDto dto = new BoardDto(no, division, title, text, user, isbn, regdate, moddate, strdate, enddate);
+				BoardDto dto = new BoardDto(no, division, title, text, user, isbn, regdate, moddate, strdate, enddate, isbook);
 				list.add(dto);
 			}
 		}catch(Exception e) {
@@ -154,8 +154,47 @@ public class BoardDao {
 				Timestamp moddate =rs.getTimestamp(8);
 				Timestamp strdate=rs.getTimestamp(9);
 				Timestamp enddate=rs.getTimestamp(10);
+				boolean isbook = rs.getBoolean(11);
 				
-				boardDto = new BoardDto(no, division, title, text, user, isbn, regdate, moddate, strdate, enddate);
+				boardDto = new BoardDto(no, division, title, text, user, isbn, regdate, moddate, strdate, enddate, isbook);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+				pstmt.close();
+				rs.close(); //이거 주석처리 왜했더라 확인할것
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		return boardDto;
+	}
+	
+	
+	public ArrayList<BoardDto> readBoardByIsbn(String isbn) {
+		String sql = "select * from board where isbn = ? order by `no` desc";
+		ArrayList<BoardDto> list = new ArrayList<>();
+		try {
+			this.conn = DBManager.getConnection();
+			this.pstmt = conn.prepareStatement(sql);
+			this.pstmt.setString(1, isbn);
+			this.rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				long no = rs.getLong(1);
+				int division = rs.getInt(2);
+				String title = rs.getString(3);
+				String text = rs.getString(4);
+				String user = rs.getString(5);
+				Timestamp regdate =rs.getTimestamp(7);
+				Timestamp moddate =rs.getTimestamp(8);
+				Timestamp strdate=rs.getTimestamp(9);
+				Timestamp enddate=rs.getTimestamp(10);
+				boolean isbook = rs.getBoolean(11);
+				
+				list.add(new BoardDto(no, division, title, text, user, isbn, regdate, moddate, strdate, enddate, isbook));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -168,7 +207,12 @@ public class BoardDao {
 				e.printStackTrace();
 			}
 		}
-		return boardDto;
+		return list;
 	}
 	
+
+	
+	
+	//update review set content = ?, modDate = now() where no = ?
+	//나중에 업데이트 할 때 참고하기.
 }

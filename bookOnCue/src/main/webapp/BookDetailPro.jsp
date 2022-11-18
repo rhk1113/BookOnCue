@@ -31,8 +31,9 @@
 	
 	if(check==null){
 	bookDao.createBook(bookDto);
-	System.out.println("등록 완료");
+	System.out.println("책등록 완료");
 	}else{
+		System.out.println("이미 등록된 책입니다.");
 		System.out.println(check);
 	}
 	%>

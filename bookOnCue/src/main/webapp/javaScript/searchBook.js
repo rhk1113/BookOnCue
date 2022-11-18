@@ -16,7 +16,9 @@ console.log(word);
     $.ajax({
         method: "GET",
         url: "http://dapi.kakao.com/v3/search/book",
-        data: {query:word}
+        data: {query:word,
+				page:page,
+				size:12}
         ,
         headers : {
             Authorization : "KakaoAK 2b45b3e5239161ad1d52d1d7d07ca4fe"
@@ -55,7 +57,9 @@ console.log(word);
         if (is_End === true) {
             $('.next_button').hide();
 
-        }
+        }else{
+	            $('.next_button').show();
+}
         if (page === 1) {
             $('.next_button').show();
             $('.back_button').hide();

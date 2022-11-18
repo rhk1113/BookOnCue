@@ -13,9 +13,10 @@ public class BoardDto {
 	private Timestamp moddate;
 	private Timestamp strdate; //이벤트 항목 선택시 
 	private Timestamp enddate; //이벤트 항목 선택시
+	private boolean isbook;
 	
 	public BoardDto(long no, int division, String title, String text, String user, String isbn, Timestamp regdate,
-			Timestamp moddate, Timestamp strdate, Timestamp enddate) {
+			Timestamp moddate, Timestamp strdate, Timestamp enddate, boolean isbook) {
 		super();
 		this.no = no;
 		this.division = division;
@@ -27,7 +28,24 @@ public class BoardDto {
 		this.moddate = moddate;
 		this.strdate = strdate;
 		this.enddate = enddate;
+		this.isbook = isbook;
 	}
+	
+
+	public BoardDto(long no, int division, String title, String text, String user, String isbn, Timestamp strdate,
+			Timestamp enddate, boolean isbook) {
+		super();
+		this.no = no;
+		this.division = division;
+		this.title = title;
+		this.text = text;
+		this.user = user;
+		this.isbn = isbn;
+		this.strdate = strdate;
+		this.enddate = enddate;
+		this.isbook = isbook;
+	}
+
 
 	public long getNo() {
 		return no;
@@ -109,5 +127,12 @@ public class BoardDto {
 		this.enddate = enddate;
 	}
 	
+	public boolean isIsbook() {
+		return isbook;
+	}
+
+	public void setIsbook(boolean isbook) {
+		this.isbook = isbook;
+	}
 	
 }

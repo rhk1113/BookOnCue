@@ -10,6 +10,7 @@ public class BookDto {
 	private String url;
 	private String publisher;
 
+
 	
 	public BookDto(long id, String title, String author, String isbn, String img, int price, String url, String publisher) {
 		super();
@@ -21,6 +22,7 @@ public class BookDto {
 		this.price = price;
 		this.url = url;
 		this.publisher = publisher;
+
 	}
 
 	public long getId() {
@@ -87,6 +89,7 @@ public class BookDto {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
+
+
 	
 }

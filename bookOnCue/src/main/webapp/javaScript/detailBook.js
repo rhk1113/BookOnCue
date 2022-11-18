@@ -62,6 +62,7 @@ console.log("word:",word);
 
 function gotoWrite(){
 	bookToDB();
+	
 	$(location).attr('href', `BoardWrite.jsp?isbn=${isbnshort}`);
 }
 

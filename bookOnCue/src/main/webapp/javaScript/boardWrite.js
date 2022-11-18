@@ -7,6 +7,7 @@
 
 let division=1;
 let admin = document.getElementById("admin").value;
+let id = document.getElementById("user").value;
 console.log(admin);
 //이벤트 날짜 자구 떠있네 ㅠ 숨겨
 eventDateOff();
@@ -18,12 +19,20 @@ if(admin==="true"){
 }
 
 
+//기본값 설정
+document.getElementById('division').value=getdiv();
+
 let getisbn = document.getElementById("getisbn").value;
 let isisbn = document.getElementById("isisbn").value;
+
+// 책인지 여부 체크
 if(isisbn==="true"){
 	console.log("책들어왔네!");
 	bookWrite();
 	$(`.bookcheck`).show();
+	$(".selectbox option:eq(1)").prop("selected", true);
+	document.getElementById('division').value="2";
+	document.getElementById('isbook').value = "true";
 }else if(isisbn==="false"){
 		console.log("책이없어!");
 	$(`.bookcheck`).hide();
@@ -34,25 +43,37 @@ function selected(num){
 	if(num==="1"){
 		eventDateOff();
 		division=1;
-		console.log(division);
+		document.getElementById('division').value = getdiv();
+		console.log(division,document.getElementById('division').value);
 	}else if(num=="2"){
+		if(isisbn==="true"){
 		$("input:checkbox[id='bookcheck']").prop("checked", true);
+				document.getElementById('isbook').value = "true";
 				$(`.container`).show();
 		eventDateOff();
 		division=2;
-		console.log(division);
+		document.getElementById('division').value = getdiv();
+		console.log(division,document.getElementById('division').value);
+		}else if(admin==="false"){
+			 if(confirm('책 평론을 쓰기 위해 책을 찾을 찾으러 갈까요?')) {
+          $(location).attr('href', 'searchBook.jsp?query=오늘의 책');
+      } else {
+      }
+		}
 	}else if (num=="3"){
 		$("input:checkbox[id='bookcheck']").prop("checked", false);
 				$(`.container`).hide();
 		eventDateOff();
 		division=3;
-		console.log(division);
+		document.getElementById('division').value = getdiv();
+		console.log(division,document.getElementById('division').value);
 	}else if(num=="4"){
 				$("input:checkbox[id='bookcheck']").prop("checked", false);
 						$(`.container`).hide();
 		eventDateOn();
 		division=4;
-		console.log(division);
+		document.getElementById('division').value = getdiv();
+		console.log(division,document.getElementById('division').value);
 	}
 }
 
@@ -83,20 +104,32 @@ function bookWrite(){ // isbn이 있을 때 처음 추가되는 형식으로하�
 	)
 }
 
+function getdiv(){
+	return division;
+}
 
 
 function eventbook(event) {
 	if (event.target.checked) {
 		$(`.container`).show();
+		document.getElementById('isbook').value = "true";
+		console.log(division,document.getElementById('division').value,document.getElementById('isbook').value)
 		if (division >= 3) {
 			division += 2;
 			console.log(division);
+			let title = document.getElementById("postTitle").value;
+			let text = document.getElementById("postText").value;
+			document.getElementById('division').value = getdiv();
+			console.log(division,document.getElementById('division').value,document.getElementById('isbook').value)
 		}
 	} else {
 		$(`.container`).hide();
+		document.getElementById('isbook').value = "false";
+		console.log(division,document.getElementById('division').value,document.getElementById('isbook').value)
 		if (division >= 5) {
 			division -= 2;
-			console.log(division);
+			document.getElementById('division').value = getdiv();
+			console.log(division,document.getElementById('division').value,document.getElementById('isbook').value);
 		}
 	}
 }
@@ -122,20 +155,14 @@ console.log(dateString);
 //	private Timestamp moddate;
 //	private Timestamp strdate; //이벤트 항목 선택시 
 //	private Timestamp enddate; //이벤트 항목 선택시
-function boardWriting(){
-	$.ajax({
-		url:"bookWritePro.jsp",
-		data:{
-			division:division,
-			title:title,
-			text:text,
-	//		user:id,
-			isbn:getisbn,
-			regdate:dateString,
-	//		moddate:moddate,
-	//		strdate:strdate,
-	//		enddate:enddate
-			
-		}
-	})
-}
+
+
+//document.getElementById('division').value = getdiv();
+//$('#writeAbout').submit(
+//	boardWriting()
+//);
+
+
+
+
+
