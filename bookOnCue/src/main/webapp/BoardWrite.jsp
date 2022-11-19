@@ -1,7 +1,8 @@
-<%@page import="datas.user.UserDto"%>
-<%@page import="datas.user.UserDao"%>
-<%@page import="datas.book.BookDto"%>
-<%@page import="datas.book.BookDao"%>
+<%@page import="bookOnCue.book.BookDao"%>
+<%@page import="bookOnCue.book.BookDto"%>
+<%@page import="bookOnCue.user.UserDto"%>
+<%@page import="bookOnCue.user.UserDao"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

@@ -1,4 +1,4 @@
-package datas.book;
+package bookOnCue.book;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import datas.util.data.DBManager;
+import bookOnCue.util.data.DBManager;
+
 
 public class BookDao {
 	

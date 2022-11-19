@@ -1,4 +1,4 @@
-package datas.book;
+package bookOnCue.book;
 
 public class BookDto {
 	private long id;

@@ -1,4 +1,4 @@
-package datas.user;
+package bookOnCue.user;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import datas.util.data.DBManager;
+import bookOnCue.util.data.DBManager;
+
 
 public class UserDao {
 

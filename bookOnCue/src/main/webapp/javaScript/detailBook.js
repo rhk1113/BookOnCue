@@ -16,7 +16,7 @@ let isbnshort;
 // 줄거리 URL 뺄까...? 
 let word = document.getElementById("getisbn").value;
 getDetail(word);
-
+getreview();
 function getDetail(word) {
     $(".container").empty(); // 결과비우기
 
@@ -85,7 +85,64 @@ function bookToDB(){
 	})
 }
 
+let lastPage = 100;
+let page =0;
 
+function getreview(){
+	$(".review").empty();
+	let query = $("#getisbn").val();
+	$.ajax({
+		method:"POST",
+		url:"/bookOnCue/datas/DetailBookReviewAction",
+		data:{
+			getisbn:query
+		}
+	}).done(function(response){
+		const list = response;
+		console.log("list:",list);
+		lastPage=parseInt(list.length / 5);
+		if(list.length/5>lastpage){
+			lastPage++;
+		}
+		for(let i = 0+page*5 ; i<5+page*5 ; i++){
+			if(i==list.length()){
+				break;
+			}
+			const no = list[i].no;
+			const title = list[i].title;
+			const user= list[i].user;
 
+			$(".review").append(
+				`<tr class = "reviewContent">
+					<td>${i+1}</td>
+					<td><a href="bookView.jsp?=${no}">${title}</a></td>
+					<td>${user}</td>
+				</tr>`
+			)			
+		}
+		$('.back').hide();
+        $('.next').hide();
 
+		if(page !== lastPage-1){
+            $('.next').show();
+        }
+        if(page!==0){
+            $('.back').show();
+        }
+	});
+}
 
+function pageUp(){
+    if(page!==lastPage){
+        page++;
+		getreview();
+        $('.back_button').show();
+    }
+}
+
+function pageDown(){
+    if(page > 1){
+        page--;
+        getreview();
+    }
+}

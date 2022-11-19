@@ -1,4 +1,4 @@
-package datas.board;
+package bookOnCue.board;
 
 import java.sql.Timestamp;
 

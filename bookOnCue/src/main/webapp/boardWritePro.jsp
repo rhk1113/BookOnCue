@@ -1,8 +1,8 @@
+<%@page import="bookOnCue.board.BoardDto"%>
+<%@page import="bookOnCue.board.BoardDao"%>
 <%@page import="java.time.LocalDateTime"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.sql.Timestamp"%>
-<%@page import="datas.board.BoardDto"%>
-<%@page import="datas.board.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>

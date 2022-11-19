@@ -1,5 +1,5 @@
-<%@page import="datas.user.UserDto"%>
-<%@page import="datas.user.UserDao"%>
+<%@page import="bookOnCue.user.UserDto"%>
+<%@page import="bookOnCue.user.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -28,7 +28,8 @@ if(id==null){
 	
 	<span><b><%=nickname%></b>님 안녕하세요!</span>
     <button onclick="location.href='logoutPro.jsp'">로그아웃</button>
-	<button onclick="location.href='myPage.jsp'">마이페이지</button>  	
+	<button onclick="location.href='myPage.jsp'">마이페이지</button> 
+	<button onclick="location.href='BoardWrite.jsp'">글쓰러가기</button> 
 <% }%>
 
 <form method="post" action = "searchBook.jsp">

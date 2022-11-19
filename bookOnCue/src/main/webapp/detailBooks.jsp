@@ -20,8 +20,8 @@ System.out.println(query);
     
     
     <form>
-    <input type= "hidden" value="<%=query%>" id="getisbn">
-    <input type="button" value = "평론하기" onclick = "gotoWrite()">
+    <input type= "hidden" value="<%=query%>" id="getisbn" name="getisbn">
+    <input type="button" value = "서평하기" onclick = "gotoWrite()">
     </form>
     
     <% 
@@ -30,6 +30,28 @@ System.out.println(query);
     ArrayList<BoardDto> list= boardDao.readBoardByIsbn(query);
     if(list!=null){
     	isreview=true;
+    	ArrayList<BoardDto> bookAno = new ArrayList<BoardDto>();
+        for(BoardDto dto : list){
+        	if(dto.getDivision()==6||dto.getDivision()==5){
+        	bookAno.add(dto);
+        	}
+        }
+        ArrayList<BoardDto> bookReview = new ArrayList<BoardDto>();
+        for(BoardDto dto : list){ 
+    	 	if(dto.getDivision()==2) {
+    		bookReview.add(dto);
+    		}
+    	 }
+    	int no = bookReview.size();
+    	int lastPage = 0;
+    	if (no>5){
+    		if (no%5==0){
+    			lastPage = no/5;
+    		}else{
+    			lastPage = no/5+1;
+    		}
+    	}
+        int p = 0;  
     %>
     <input type ="hidden" id = "">
     <div class ="bookreviews">
@@ -40,20 +62,35 @@ System.out.println(query);
     	</thead>
     	<tbody>
     <% int i=1;
-    for(BoardDto dto : list){ %>
-    	<tr>
-    	<td><%=i%></td>
-    	<td><a href ="dto.getNo의페이지이동처리"><%=dto.getTitle() %></a></td>
-    	<td><%=dto.getUser()%></td>
-    	<% if(dto.getDivision()==6) {%>
-    	<td><%=dto.getStrdate()%></td>
-    	<td><%=dto.getEnddate()%></td>
-    	<%} %>
-    <%i++;}}else{isreview = false;}%>
-    	</tr>
+    //해당 책 관련 공지사항들 먼저 출력 3줄만 무조건 최근거 3개만 
+    
+    if(bookAno.size()>0){
+    	for(int j=0; j<3; j++){ %>
+    		<tr>
+    			<td><%=i%></td>
+    			<td><a href ="dto.getNo의페이지이동처리"><%=bookAno.get(j).getTitle()%></a><td>
+    			<td><%=bookAno.get(j).getUser()%><td>
+    		    <td><%=bookAno.get(j).getStrdate()%><td>
+    		    <td><%=bookAno.get(j).getEnddate()%><td>
+    		</tr>
+		<%i++;
+		if(bookAno.size()==j+1){
+			break;
+		}
+    	}}
+    %>
     	</tbody>
+    <tbody class="review"></tbody>   
     </table>
+    <input type=button onclick="pageDown()" value = "back">
+    <input type=button onclick="pageUp()" value = "next">
+   
     </div>
+<% }else{isreview = false;%>
+	<div>
+	<p>서평하기를 눌러 여러분의 감상을 들려주세요!</p>
+	</div>
+<% }%>
    
 <!-- 들어갈 예정 -->
     <script src="javaScript/detailBook.js"></script>    

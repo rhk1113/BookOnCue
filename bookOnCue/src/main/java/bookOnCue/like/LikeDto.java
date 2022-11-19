@@ -1,11 +1,11 @@
-package datas.wish;
+package bookOnCue.like;
 
-public class WishDto {
+public class LikeDto {
 	private long no; // 데이터베이서 내 고유번호
 	private String isbn;
 	private String user;
 	
-	public WishDto(long no, String isbn, String user) {
+	public LikeDto(long no, String isbn, String user) {
 		super();
 		this.no = no;
 		this.isbn = isbn;
@@ -36,5 +36,4 @@ public class WishDto {
 //		this.user = user;
 //	}
 
-	
 }

@@ -1,4 +1,4 @@
-package datas.user;
+package bookOnCue.user;
 
 import java.sql.Timestamp;
 
