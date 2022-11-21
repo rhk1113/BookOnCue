@@ -14,6 +14,7 @@ let isbnshort;
 // 생각해보니까 여기서 api로 정보를 끌어온다면 DB에 줄거리고 뭐고 다 안들어가도 되지 않나...?
 // 글쓸때 필요한 책제목 이미지 작가 isbn 타이틀 아이디 추란사(최소한의 예의) 줄거리 넣을 필요 없을 것 같은데
 // 줄거리 URL 뺄까...? 
+let curUser = document.getElementById("curUser").value;
 let word = document.getElementById("getisbn").value;
 getDetail(word);
 
@@ -61,10 +62,17 @@ console.log("word:",word);
     });
 }
 
+	console.log(curUser);
 function gotoWrite(){
+	if(curUser==="null"){
+		alert('로그인이 필요한 서비스입니다!');
+	$(location).attr('href', `login.jsp`);
+	}else{
+	
 	bookToDB();
 	
 	$(location).attr('href', `BoardWrite.jsp?isbn=${isbnshort}`);
+	}
 }
 
 let img;
@@ -87,6 +95,8 @@ function bookToDB(){
 }
 
 
+
+
 let page =0;
 let lastPage =0;
 function getreview(){
@@ -94,7 +104,7 @@ function getreview(){
 	let query = $("#getisbn").val();
 	$.ajax({
 		method:"POST",
-		url:"/bookOnCue/DetailBookReviewAction",
+		url:"/bookOnCue/GetBookReviewAction",
 		data:{
 			getisbn:query
 		}

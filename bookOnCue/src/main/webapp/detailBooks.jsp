@@ -15,11 +15,13 @@
 <body>
 	<%String query = request.getParameter("isbn");
 System.out.println(query);
+String id = (String)session.getAttribute("id");
 %>
 	<div class="container"></div>
 
 
 	<form>
+	<input type="hidden" value="<%=id%>" id="curUser">
 		<input type="hidden" value="<%=query%>" id="getisbn" name="getisbn">
 		<input type="button" value="서평하기" onclick="gotoWrite()">
 	</form>

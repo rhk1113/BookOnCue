@@ -248,9 +248,52 @@ public class BoardDao {
 		return list;
 	}
 	
-
+	public void updatePost(BoardDto boardDto,long no) {
+		String sql = "update board set division=?, `title`=?, `text` = ?, strdate=?, enddate=?, isbook=?, moddate = now() where no = ?";
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			this.pstmt.setInt(1, boardDto.getDivision());
+			this.pstmt.setString(2,boardDto.getTitle());
+			this.pstmt.setString(3,boardDto.getText());
+			this.pstmt.setTimestamp(4, boardDto.getStrdate());
+			this.pstmt.setTimestamp(5, boardDto.getEnddate());
+			this.pstmt.setBoolean(6, boardDto.isIsbook());
+			this.pstmt.setLong(7, no);
+			this.pstmt.execute();
+			System.out.println("업데이트 성공");
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("업데이트 실패");
+		}finally {
+			try {
+				pstmt.close();
+				conn.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
+	public void deletePost(long no) {
+		String sql = "delete from board where no = ?";
+		try {
+			conn = DBManager.getConnection();
+			PreparedStatement pstmt = null;
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, no);
+			pstmt.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
-	//update review set content = ?, modDate = now() where no = ?
-	//나중에 업데이트 할 때 참고하기.
-}
+ }

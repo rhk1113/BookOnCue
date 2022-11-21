@@ -13,16 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class DetailBookReviewAction
+ * Servlet implementation class GetBookReviewAction
  */
-@WebServlet("/DetailBookReviewAction")
-public class DetailBookReviewAction extends HttpServlet {
+@WebServlet("/GetBookReviewAction")
+public class GetBookReviewAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DetailBookReviewAction() {
+    public GetBookReviewAction() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,11 +39,11 @@ public class DetailBookReviewAction extends HttpServlet {
 		BoardDao boardDao = BoardDao.getInstance();
 		ArrayList<BoardDto> list= boardDao.readBoardByIsbn(query);
 		System.out.println(list);
-
+		
 		ArrayList<BoardDto> bookReview = new ArrayList<BoardDto>();
 		for(BoardDto dto : list){ 
-		 	if(dto.getDivision()==2) {
-			bookReview.add(dto);
+			if(dto.getDivision()==2) {
+				bookReview.add(dto);
 			}
 		}
 

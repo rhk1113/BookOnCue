@@ -42,7 +42,7 @@
     	for(int j=0; j<3; j++){ %>
 				<tr>
 					<td><%=i%></td>
-					<td><a href="dto.getNo의페이지이동처리"><%=anounce.get(j).getTitle()%></a>
+					<td><a href="boardView.jsp?no=<%=anounce.get(j).getNo()%>"><%=anounce.get(j).getTitle()%></a>
 					</td>
 					<td><%=anounce.get(j).getUser()%>
 					</td>
@@ -64,6 +64,8 @@
 </tbody>
 <tbody class = "posts"></tbody>
 </table>
+	<input type=button onclick="pageDown()" value="back" class = "back"> 
+		<input type=button onclick="pageUp()" value="next" class = "next">
 <script src="javaScript/boardList.js"></script>
 </body>
 </html>

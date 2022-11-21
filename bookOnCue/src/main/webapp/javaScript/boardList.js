@@ -1,26 +1,38 @@
 let div = 1;
 let page =0;
 let lastPage=0;
+let flag = false;
 getPost(div);
 
 function div1(){
+	page=0;
+		flag=false;
 div=1;
 getPost(div);	
 }
 function div2(){
+	page=0;
+		flag=false;
 	div=2;
 getPost(div);	
 }
 function div3(){
+	page=0;
+		flag=false;
 	div=3;
 getPost(div);	
 }
 function div4(){
+	page=0;
+		flag=false;
 	div=4;
 getPost(div);	
 }
 
+
 function getPost(div){
+
+	flag=false;
 	let min=0;
 	let max=7;
 	if(div===1){
@@ -28,7 +40,7 @@ function getPost(div){
 		max=7;		
 	}else if(div===2){
 		min=2;
-		max=5;
+		max=8;
 	}else if (div===3){
 		min=0;
 		max=2;
@@ -48,8 +60,11 @@ function getPost(div){
 			lastPage++;
 		}
 		console.log(lastPage);
-		for(let i = 0+page*10 ; i<10+page*10 ; i++){
+		let j = page*10;
+		let posts = 0;
+		for(let i = 0+page*10 ; ; i++){
 			if(i==list.length){
+				flag=true;
 				break;
 			}
 			const no = list[i].no;
@@ -59,13 +74,17 @@ function getPost(div){
 			if(min<div&&max>div){				
 			$(".posts").append(
 				`<tr class = "reviewContent">
-					<td>${i+1}</td>
+					<td>${j+1}</td>
 					<td><a href="boardView.jsp?no=${no}">${title}</a></td>
 					<td>${user}</td>
 				</tr>`
-			)			
+			)
+			j++;
+			posts++;
+			if (posts===10){
+				break;
+			}			
 			}else{
-				i--;
 			}
 		}
 		$('.back').hide();
@@ -74,16 +93,22 @@ function getPost(div){
         if(page!==0){
             $('.back').show();
         }
+		console.log(flag);
+		
 		if(page !== lastPage-1){
             $('.next').show();
         }
+
+		if(flag){
+			$('.next').hide();
+		}
 	});
 }
 
 function pageUp(){
     if(page!==lastPage-1){
         page++;
-		getreview();
+		getPost(div)
         $('.back_button').show();
     }
 }
@@ -91,6 +116,6 @@ function pageUp(){
 function pageDown(){
     if(page > 0){
         page--;
-        getreview();
+		getPost(div)
     }
 }

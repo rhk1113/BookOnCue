@@ -270,7 +270,24 @@ public class UserDao {
 	}
 	
 	public void deleteUser(String user) {
-		
+		String sql = "delete from `user` where `user` = ?";
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user);
+			pstmt.execute();
+			System.out.println("유저 삭제 완료!");
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("유저 삭제 실패!");
+		}finally {
+			try {
+				pstmt.close();
+				conn.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

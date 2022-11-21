@@ -147,7 +147,44 @@ public class CommentDao {
 	return dto;
 	}
 	
+	public void updateComment(CommentDto coDto, long no) {
+		String sql = "update comment set `text` = ?, moddate = now() where `no` = ?";
+		try {
+			conn=DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, coDto.getText());
+			pstmt.setLong(2, no);
+			pstmt.executeQuery();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
+	public void deleteComment(long no) {
+		String sql = "delete from comment where `no` = ?";
+		try {
+			conn=DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, no);
+			pstmt.executeQuery();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	
 	

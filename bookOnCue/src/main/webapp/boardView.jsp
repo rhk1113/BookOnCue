@@ -24,8 +24,7 @@
 	String id = (String)session.getAttribute("id");
 	BookDao bookDao = BookDao.getInstance();
 	BookDto bookDto = bookDao.getBookByIsbn(boardDto.getIsbn());
-	UserDao userDao = UserDao.getinstance();
-	UserDto userDto = userDao.readUserById(id);
+	
 %>
 <div>
 <div><%=boardDto.getTitle()%></div>
@@ -53,15 +52,27 @@
 
 </div>
 <%if(boardDto.getUser().equals(id)){%>
-		<button>수정하기</button>
+		<button onclick = "location.href='BoardEdit.jsp?no=<%=no%>'">수정하기</button>
 		<button>삭제하기</button>
-<%}%>
-<form method="post">
-	<input type = "hidden" value = "<%=userDto.isManager()%>" id = "isManager">
+<%}
+	UserDao userDao = UserDao.getinstance();
+	UserDto userDto = userDao.readUserById(id);
+	boolean manager=false;
+if(id!=null){manager = userDto.isManager();}%>
+
+
+<form method="post" class = "leaveComment">
+	<input type = "hidden" value = "<%=manager%>" id = "isManager">
 	<input type="hidden" value = "<%=no %>" class = "postNo" id = "postNo">
 	<input type="hidden" value="<%=id %>" id="curUser">
 	<textarea id ="commentBox"></textarea>
 	<input type="submit" onclick = "commentUp()">
+</form>
+<form method="post"class = "EditComment" style="display:none;">
+	<input type = "hidden" value = "<%=manager%>" id = "isManager">
+	<input type="hidden" value = "<%=no%>" class = "postNo" id = "postNo">
+	<input type="hidden" value="<%=id %>" id="curUser">
+	<input type="submit" onclick = "commentEdit()">
 </form>
 <div class = "comments"></div>
 <input type=button onclick="pageDown()" value="back" class = "back"> 

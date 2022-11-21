@@ -15,5 +15,7 @@ UserDao userDao = UserDao.getinstance();
 UserDto userDto = userDao.readUserById(id);%>
 
 	<button onclick="location.href='updateUser.jsp'">회원정보수정</button>
+
+
 </body>
 </html>

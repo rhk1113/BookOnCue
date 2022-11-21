@@ -4,6 +4,14 @@ let isManager = document.getElementById("isManager").value;
 let page = 0;
 let lastpage=0;
 let text = document.getElementById("commentBox").value;
+console.log(curUser);
+
+if(curUser==="null"){
+	$(".leaveComment").hide();
+	$(`.delete_co`).hide();
+	$(`.modify_co`).hide();
+}
+
 
 function commentUp(){
 text = document.getElementById("commentBox").value;
@@ -52,15 +60,17 @@ function getComments(){
 				<input type="hidden" id = "no${no}" value="${no}">
 					<span>${i+1}</span>
 					<span class = "coWriter">${user}</span>
-					<span>${text}</span>
+					<span class = "text${no}">${text}</span>
 					<span>${regdate}</span>
 					<span>${moddate}</span>
-					<button class="modify_co" id = "modify_co${user}">수정하기</button>
-					<button class="delete_co" id = "delete_co${user}">삭제하기</button>
+					<button class="modify_co" id = "modify_co${user}" onclick="updateComment(${no},${text})">수정하기</button>
+					<button class="delete_co" id = "delete_co${user}" onclick = "if(confirm('삭제하시겠습니까?'))deleteComment(${no})">삭제하기</button>
 				</div>`
 			)			
 			$(`#delete_co${user}`).hide();
 			$(`#modify_co${user}`).hide();
+			console.log(curUser);
+			console.log(user);
 			if(user === curUser){
 				$(`#delete_co${curUser}`).show();
 				$(`#modify_co${curUser}`).show();
@@ -72,6 +82,11 @@ function getComments(){
 				$(`.delete_co`).show();
 				$(`.modify_co`).show();
 			}
+			if(curUser==="null"){
+	$(".leaveComment").hide();
+	$(`.delete_co`).hide();
+	$(`.modify_co`).hide();
+}
 		$('.back').hide();
         $('.next').hide();
 
@@ -88,7 +103,7 @@ function getComments(){
 function pageUp(){
     if(page!==lastPage-1){
         page++;
-getComments();
+		getComments();
         $('.back_button').show();
     }
 }
@@ -99,3 +114,33 @@ function pageDown(){
         getComments();
     }
 }
+
+function updateComment(no, text){
+	$(".leaveComment").hide();
+	$(".EditComment").show();		
+	$(".EditComment").append(
+		`<input type="hidden" id = "editno${no}" value="${no}" name = "CommentNo">
+		<textarea id ="editCommentBox" value="${text}"></textarea>`
+	)
+	$(`.delete_co`).hide();
+	$(`.modify_co`).hide();
+}
+
+function commentEdit(){
+text = document.getElementById("editCommentBox").value;
+let commentnum = document.getElementById(`editno${no}`).value;
+console.log(text);
+	$.ajax({
+		method:"POST",
+		url: "boardViewPro.jsp",
+		data:{
+			no:commentnum,
+			post:postNo,
+			id:curUser,
+			text:text
+		}
+	}).done(function(response){
+		getComments();
+	})
+}
+
