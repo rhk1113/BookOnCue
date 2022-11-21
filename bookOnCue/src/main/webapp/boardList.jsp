@@ -12,6 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<button onclick="location.href='index.jsp'">메인으로 돌아가기</button>
 <% 
 	String id = (String)session.getAttribute("id");
     boolean isreview = false;
@@ -47,7 +48,7 @@
 					</td>
 					<td><%=anounce.get(j).getUser()%>
 					</td>
-					<%if(anounce.get(j).getDivision()==6){%>
+					<%if(anounce.get(j).getDivision()==6||anounce.get(j).getDivision()==4){%>
 					<td><%=anounce.get(j).getStrdate()%>
 					</td>
 					<td><%=anounce.get(j).getEnddate()%>

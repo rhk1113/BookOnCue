@@ -25,6 +25,9 @@
 	BookDao bookDao = BookDao.getInstance();
 	BookDto bookDto = bookDao.getBookByIsbn(boardDto.getIsbn());
 	
+	UserDao userDao = UserDao.getinstance();
+	UserDto	userDto = userDao.readUserById(id);
+	
 %>
 <div>
 <div><%=boardDto.getTitle()%></div>
@@ -33,7 +36,7 @@
 <% if(!boardDto.getModdate().equals(boardDto.getRegdate())){%>
 <div><%=boardDto.getModdate()%></div>
 <%}%>
-<% if(boardDto.getDivision()==6){%>
+<% if(boardDto.getDivision()==6||boardDto.getDivision()==4){%>
 <div class = "div6">
 <div><%=boardDto.getStrdate()%></div>
 <div><%=boardDto.getEnddate()%></div>
@@ -51,14 +54,12 @@
 <div><%=boardDto.getText()%></div>
 
 </div>
-<%if(boardDto.getUser().equals(id)){%>
+<%if(boardDto.getUser().equals(id)||userDto.isManager()){%>
 		<button onclick = "location.href='BoardEdit.jsp?no=<%=no%>'">수정하기</button>
 		<button onclick = "location.href='BoardDeletePro.jsp?no=<%=no%>'">삭제하기</button>
 <%}
-	UserDao userDao = UserDao.getinstance();
-	UserDto userDto = userDao.readUserById(id);
 	boolean manager=false;
-if(id!=null){manager = userDto.isManager();}%>
+if(id!="null"){manager = userDto.isManager();}%>
 
 
 <form method="post" class = "leaveComment">

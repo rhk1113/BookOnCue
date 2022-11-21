@@ -30,7 +30,7 @@ String id = (String)session.getAttribute("id");
     boolean isreview = false;
     BoardDao boardDao = BoardDao.getInstance();
     ArrayList<BoardDto> list= boardDao.readBoardByIsbn(query);
-    if(list!=null){
+    if(list.size()>0){
     	isreview=true;
     	ArrayList<BoardDto> bookAno = new ArrayList<BoardDto>();
         for(BoardDto dto : list){

@@ -82,16 +82,6 @@ if(getisbn.length()==13){
 	<%}%>
 
 
-
-
-
-
-
-
-
-
-
-
 	<input type="hidden" value="<%=isisbn%>" id="isisbn">
 	<script src="javaScript/boardWrite.js"></script>
 </body>

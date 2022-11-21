@@ -15,7 +15,8 @@ UserDao userDao = UserDao.getinstance();
 UserDto userDto = userDao.readUserById(id);%>
 
 	<button onclick="location.href='updateUser.jsp'">회원정보수정</button>
-
+	<button onclick="if(confirm('탈퇴하시겠습니까?'))location.href='deleteUser.jsp'">회원탈퇴</button>
+	<button onclick="location.href='index.jsp'">메인으로 돌아가기</button>
 
 </body>
 </html>
