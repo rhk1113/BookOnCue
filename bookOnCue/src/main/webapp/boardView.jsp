@@ -53,7 +53,7 @@
 </div>
 <%if(boardDto.getUser().equals(id)){%>
 		<button onclick = "location.href='BoardEdit.jsp?no=<%=no%>'">수정하기</button>
-		<button>삭제하기</button>
+		<button onclick = "location.href='BoardDeletePro.jsp?no=<%=no%>'">삭제하기</button>
 <%}
 	UserDao userDao = UserDao.getinstance();
 	UserDto userDto = userDao.readUserById(id);
@@ -68,7 +68,7 @@ if(id!=null){manager = userDto.isManager();}%>
 	<textarea id ="commentBox"></textarea>
 	<input type="submit" onclick = "commentUp()">
 </form>
-<form method="post"class = "EditComment" style="display:none;">
+<form method="post"class = "EditComment">
 	<input type = "hidden" value = "<%=manager%>" id = "isManager">
 	<input type="hidden" value = "<%=no%>" class = "postNo" id = "postNo">
 	<input type="hidden" value="<%=id %>" id="curUser">

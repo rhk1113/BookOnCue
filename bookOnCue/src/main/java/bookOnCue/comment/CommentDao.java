@@ -154,9 +154,11 @@ public class CommentDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, coDto.getText());
 			pstmt.setLong(2, no);
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
+			System.out.println("업데이트 성공");
 		}catch(Exception e) {
 			e.printStackTrace();
+			System.out.println("업데이트 실패");
 		}finally {
 			try {
 				pstmt.close();
@@ -173,7 +175,7 @@ public class CommentDao {
 			conn=DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, no);
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

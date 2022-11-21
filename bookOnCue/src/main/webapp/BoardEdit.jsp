@@ -63,7 +63,8 @@ BookDto bookDto = null;
 	</form>
 	<!-- 여기 안에다가 책 내용 넣을것임. -->
 	<%
-if(getisbn!=null){
+if(getisbn.length()==13){
+	System.out.println(getisbn);
 	isisbn=true;
 	//null값이 아닌 띄어쓰기 등이 들어갈 것을 대비... isbn은 무조건 10~13자리.
 	BookDao bookDao = BookDao.getInstance();

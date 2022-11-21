@@ -4,6 +4,7 @@ let isManager = document.getElementById("isManager").value;
 let page = 0;
 let lastpage=0;
 let text = document.getElementById("commentBox").value;
+$(".EditComment").hide();
 console.log(curUser);
 
 if(curUser==="null"){
@@ -63,7 +64,7 @@ function getComments(){
 					<span class = "text${no}">${text}</span>
 					<span>${regdate}</span>
 					<span>${moddate}</span>
-					<button class="modify_co" id = "modify_co${user}" onclick="updateComment(${no},${text})">수정하기</button>
+					<button class="modify_co" id = "modify_co${user}" onclick="updateComment(${no})">수정하기</button>
 					<button class="delete_co" id = "delete_co${user}" onclick = "if(confirm('삭제하시겠습니까?'))deleteComment(${no})">삭제하기</button>
 				</div>`
 			)			
@@ -115,31 +116,58 @@ function pageDown(){
     }
 }
 
-function updateComment(no, text){
+function updateComment(no){
 	$(".leaveComment").hide();
-	$(".EditComment").show();		
+	$(".EditComment").show();
+	$.ajax({
+		method:"POST",
+		url: "/bookOnCue/GetOneCommentAction",
+		data:{
+			no:no
+		}
+	}).done(function(response){
+		const list =response;
+		console.log("list:",list);
+		i=0;
+		const text = list.text;
+		const no = list.no;
 	$(".EditComment").append(
-		`<input type="hidden" id = "editno${no}" value="${no}" name = "CommentNo">
-		<textarea id ="editCommentBox" value="${text}"></textarea>`
+		`<input type="hidden" id = "editcommentno" value="${no}" name = "CommentNo">
+		<textarea id ="editCommentBox">${text}</textarea>`
 	)
 	$(`.delete_co`).hide();
 	$(`.modify_co`).hide();
+});
 }
 
 function commentEdit(){
 text = document.getElementById("editCommentBox").value;
-let commentnum = document.getElementById(`editno${no}`).value;
+let no = document.getElementById("editcommentno").value;
 console.log(text);
 	$.ajax({
 		method:"POST",
-		url: "boardViewPro.jsp",
+		url: "/bookOnCue/CommentUpadteAction",
 		data:{
-			no:commentnum,
+			no:no,
 			post:postNo,
 			id:curUser,
 			text:text
 		}
 	}).done(function(response){
+		getComments();
+	})
+}
+
+function deleteComment(no){
+console.log(no);
+	$.ajax({
+		method:"POST",
+		url: "/bookOnCue/CommentDeleteAction",
+		data:{
+			no:no,
+		}
+	}).done(function(){
+		console.log("삭제완료");
 		getComments();
 	})
 }

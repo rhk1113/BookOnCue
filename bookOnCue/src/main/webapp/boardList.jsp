@@ -13,6 +13,7 @@
 </head>
 <body>
 <% 
+	String id = (String)session.getAttribute("id");
     boolean isreview = false;
     BoardDao boardDao = BoardDao.getInstance();
     ArrayList<BoardDto> list= boardDao.readBoardAll();
@@ -64,6 +65,9 @@
 </tbody>
 <tbody class = "posts"></tbody>
 </table>
+<% if (id!=null){ %>
+	<button onclick="location.href='BoardWrite.jsp'">글쓰러가기</button>
+	<%} %>
 	<input type=button onclick="pageDown()" value="back" class = "back"> 
 		<input type=button onclick="pageUp()" value="next" class = "next">
 <script src="javaScript/boardList.js"></script>
