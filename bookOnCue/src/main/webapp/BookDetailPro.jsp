@@ -1,7 +1,7 @@
 <%@page import="bookOnCue.book.BookDto"%>
 <%@page import="bookOnCue.book.BookDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
+	<%
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("utf-8");
 

@@ -58,6 +58,9 @@ function selected(num){
 			 if(confirm('책 평론을 쓰기 위해 책을 찾을 찾으러 갈까요?')) {
           $(location).attr('href', 'searchBook.jsp?query=오늘의 책');
       } else {
+		$(".selectbox option:eq(0)").prop("selected", true);
+	document.getElementById('division').value="1";
+	document.getElementById('isbook').value = "false";
       }
 		}
 	}else if (num=="3"){
@@ -143,25 +146,6 @@ var day = ('0' + today.getDate()).slice(-2);
 var dateString = year + '-' + month  + '-' + day;
 
 console.log(dateString);
-
-
-//	private long no; //게시판 내 고유번호
-//	private int division;//1.일반 커뮤니티 글 2. 책 서평글 3.일반 공지사항 4. 기간 공지사항 5. 일반 책 이벤트 6 기간 책 이벤트
-//	private String title;
-//	private String text;
-//	private String user;
-//	private String isbn;
-//	private Timestamp regdate;
-//	private Timestamp moddate;
-//	private Timestamp strdate; //이벤트 항목 선택시 
-//	private Timestamp enddate; //이벤트 항목 선택시
-
-
-//document.getElementById('division').value = getdiv();
-//$('#writeAbout').submit(
-//	boardWriting()
-//);
-
 
 
 

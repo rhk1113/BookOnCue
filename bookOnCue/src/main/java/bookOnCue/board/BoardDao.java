@@ -88,6 +88,43 @@ public class BoardDao {
 		
 	}
 	
+	public ArrayList<BoardDto> readBoardAll() {
+		String sql = "select * from board order by `no` desc";
+		ArrayList<BoardDto> list = new ArrayList<>();
+		try {
+			this.conn = DBManager.getConnection();
+			this.pstmt = conn.prepareStatement(sql);
+			this.rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				long no = rs.getLong(1);
+				int division = rs.getInt(2);
+				String title = rs.getString(3);
+				String text = rs.getString(4);
+				String user = rs.getString(5);
+				String isbn = rs.getString(6);
+				Timestamp regdate =rs.getTimestamp(7);
+				Timestamp moddate =rs.getTimestamp(8);
+				Timestamp strdate=rs.getTimestamp(9);
+				Timestamp enddate=rs.getTimestamp(10);
+				boolean isbook = rs.getBoolean(11);
+				
+				BoardDto dto = new BoardDto(no, division, title, text, user, isbn, regdate, moddate, strdate, enddate, isbook);
+				list.add(dto);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+				pstmt.close();
+				rs.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 //	private long no; //게시판 내 고유번호
 //	private int division;//1.일반 커뮤니티 글 2. 책 서평글 3.일반 공지사항 4. 강조 공지사항 5. 일반 이벤트 6 서평 이벤트
 //	private String title;

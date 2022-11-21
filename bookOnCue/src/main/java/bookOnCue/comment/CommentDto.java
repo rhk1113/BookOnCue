@@ -18,6 +18,17 @@ public class CommentDto {
 		this.regdate = regdate;
 		this.moddate = moddate;
 	}
+	
+	
+	public CommentDto(long no, String id, long post, String text) {
+		super();
+		this.no = no;
+		this.id = id;
+		this.post = post;
+		this.text = text;
+	}
+
+
 	public long getNo() {
 		return no;
 	}
