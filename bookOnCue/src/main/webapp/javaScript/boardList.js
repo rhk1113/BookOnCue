@@ -56,6 +56,8 @@ function getPost(div){
 		const list = response;
 		console.log("list:",list);
 		lastPage= Math.floor(list.length / 10);
+		
+			
 		if(list.length/10>lastPage){
 			lastPage++;
 		}
@@ -96,6 +98,7 @@ function getPost(div){
 		console.log(flag);
 		
 		if(page !== lastPage-1){
+			
             $('.next').show();
         }
 
@@ -107,6 +110,7 @@ function getPost(div){
 
 function pageUp(){
     if(page!==lastPage-1){
+
         page++;
 		getPost(div)
         $('.back_button').show();

@@ -47,6 +47,7 @@ function getComments(){
 			lastPage++;
 		}
 		console.log(lastPage);
+		
 		for(let i = 0+page*5 ; i<5+page*5 ; i++){
 			if(i==list.length){
 				break;
@@ -94,8 +95,13 @@ function getComments(){
         if(page!==0){
             $('.back').show();
         }
+		console.log("page:",page , "last", lastPage);
 		if(page !== lastPage-1){
             $('.next').show();
+        }
+		
+		if(page === lastPage){
+            $('.next').hide();
         }
 		
 	});

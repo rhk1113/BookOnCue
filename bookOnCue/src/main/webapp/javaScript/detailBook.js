@@ -33,7 +33,7 @@ console.log("word:",word);
         }
     }).done(function (response) {
         console.log("response : ", response);
-        const list = response.documents;    //10개의 오브젝트
+        const list = response.documents;    
         list.forEach(e => {
             url =e.url;
             thumbnail = e.thumbnail;
@@ -45,7 +45,7 @@ console.log("word:",word);
 			isbn = e.isbn;
 			
 			const isbnarr = isbn.split(" ");
-			isbnshort = isbnarr[1];
+			isbnshort = isbnarr[1]; //13자리 짜리 isbn
 			console.log(isbnshort);
             $(`.container`).append(
                 `
@@ -146,6 +146,7 @@ function getreview(){
 
 function pageUp(){
     if(page!==lastPage-1){
+
         page++;
 		getreview();
         $('.back_button').show();
