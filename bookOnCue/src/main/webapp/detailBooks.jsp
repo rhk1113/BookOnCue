@@ -18,7 +18,10 @@ System.out.println(query);
 String id = (String)session.getAttribute("id");
 %>
 	<div class="container"></div>
-
+	<div class = "likeBox">
+    	<button class = "like" id ="like" name="like" onclick="toggleLike()"><span id="isLike">좋아요</span><span id="like-count"></span></button>
+    	<button class = "want" id ="want" name="want" onclick="toggleWant()"><span id="wantText">찜여부</span></button>
+    </div>
 
 	<form>
 	<input type="hidden" value="<%=id%>" id="curUser">
@@ -88,5 +91,13 @@ String id = (String)session.getAttribute("id");
 
 	<!-- 들어갈 예정 -->
 	<script src="javaScript/detailBook.js"></script>
+	<script src="javaScript/likeAndWish.js"></script>
+	<script>
+	function toggleWant(){
+		bookToDB();
+		work();
+		CDWish();
+	}
+	</script>
 </body>
 </html>

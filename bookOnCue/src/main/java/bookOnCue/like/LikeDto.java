@@ -2,14 +2,20 @@ package bookOnCue.like;
 
 public class LikeDto {
 	private long no; // 데이터베이서 내 고유번호
-	private String isbn;
 	private String user;
+	private String isbn;
 	
-	public LikeDto(long no, String isbn, String user) {
+	public LikeDto(long no, String user, String isbn) {
 		super();
 		this.no = no;
-		this.isbn = isbn;
 		this.user = user;
+		this.isbn = isbn;
+	}
+
+	public LikeDto(String user,String isbn) {
+		super();
+		this.user = user;
+		this.isbn = isbn;
 	}
 
 	public long getNo() {
