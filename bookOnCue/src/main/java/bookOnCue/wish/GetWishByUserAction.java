@@ -2,6 +2,7 @@ package bookOnCue.wish;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,16 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class CheckLikeAction
+ * Servlet implementation class GetWishByUserAction
  */
-@WebServlet("/CheckWishAction")
-public class CheckWishAction extends HttpServlet {
+@WebServlet("/GetWishByUserAction")
+public class GetWishByUserAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckWishAction() {
+    public GetWishByUserAction() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,22 +34,13 @@ public class CheckWishAction extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("application/json");
 		request.setCharacterEncoding("utf-8");
-		String user= request.getParameter("user");
-		String isbn= request.getParameter("likeisbn");
+		String user = request.getParameter("user");
 		
-		System.out.println("isbn:"+isbn);
 		WishDao wishDao = WishDao.getInstance();
-		WishDto dto = new WishDto(user,isbn); 
-		WishDto wishDto = wishDao.getWishByUserIsbn(user, isbn);
-		System.out.println("위시체크의 라이크 디티오"+wishDto);
+		ArrayList<WishDto> list = wishDao.readAllWishByUser(user);
 		
 		PrintWriter res = response.getWriter();
-		String json = new Gson().toJson(wishDto);
-		
-		if(json == null) {
-			System.out.println("아무것도 없음");
-		}
-		System.out.println(json);
+		String json = new Gson().toJson(list);
 		res.println(json);
 	}
 

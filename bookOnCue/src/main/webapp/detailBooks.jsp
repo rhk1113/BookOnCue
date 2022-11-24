@@ -8,11 +8,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="header.jsp"/>
 	<%String query = request.getParameter("isbn");
 System.out.println(query);
 String id = (String)session.getAttribute("id");
@@ -97,6 +97,8 @@ String id = (String)session.getAttribute("id");
 		bookToDB();
 		work();
 		CDWish();
+		work()
+		checkWish();
 	}
 	</script>
 </body>

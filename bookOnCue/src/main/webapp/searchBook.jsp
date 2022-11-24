@@ -15,6 +15,7 @@
 <title>Document</title>
 </head>
 <body>
+	<jsp:include page="header.jsp"/>
 	<% request.setCharacterEncoding("utf-8");
 String query = request.getParameter("query");
 System.out.println(query);%>

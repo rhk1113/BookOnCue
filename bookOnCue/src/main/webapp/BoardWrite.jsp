@@ -15,6 +15,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="header.jsp"/>
 	<%
 request.setCharacterEncoding("utf-8");
 boolean admin = false;

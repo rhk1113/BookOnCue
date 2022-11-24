@@ -125,16 +125,7 @@ public class BoardDao {
 		}
 		return list;
 	}
-//	private long no; //게시판 내 고유번호
-//	private int division;//1.일반 커뮤니티 글 2. 책 서평글 3.일반 공지사항 4. 강조 공지사항 5. 일반 이벤트 6 서평 이벤트
-//	private String title;
-//	private String text;
-//	private String user;
-//	private String isbn;
-//	private Timestamp regdate;
-//	private Timestamp moddate;
-//	private Timestamp strdate; //이벤트 항목 선택시 
-//	private Timestamp enddate; //이벤트 항목 선택시
+
 	public ArrayList<BoardDto> readBoardAllByDiv(int division) {
 		String sql = "select * from board where division = ? order by `no` desc";
 		ArrayList<BoardDto> list = new ArrayList<>();
@@ -233,6 +224,44 @@ public class BoardDao {
 				boolean isbook = rs.getBoolean(11);
 				
 				list.add(new BoardDto(no, division, title, text, user, isbn, regdate, moddate, strdate, enddate, isbook));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+				pstmt.close();
+				rs.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	public ArrayList<BoardDto> readBoardAllByUser(String user) {
+		String sql = "select * from board where `user` = ? order by `no` desc";
+		ArrayList<BoardDto> list = new ArrayList<>();
+		try {
+			this.conn = DBManager.getConnection();
+			this.pstmt = conn.prepareStatement(sql);
+			this.pstmt.setString(1, user);
+			this.rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				long no = rs.getLong(1);
+				int division = rs.getInt(2);
+				String title = rs.getString(3);
+				String text = rs.getString(4);
+				String isbn = rs.getString(6);
+				Timestamp regdate =rs.getTimestamp(7);
+				Timestamp moddate =rs.getTimestamp(8);
+				Timestamp strdate=rs.getTimestamp(9);
+				Timestamp enddate=rs.getTimestamp(10);
+				boolean isbook = rs.getBoolean(11);
+				
+				BoardDto dto = new BoardDto(no, division, title, text, user, isbn, regdate, moddate, strdate, enddate, isbook);
+				list.add(dto);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

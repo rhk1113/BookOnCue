@@ -81,17 +81,7 @@ public class BookDao {
 			}
 		}
 	}
-	//순서!!
-//	private long id;
-//	private String title;
-//	private String author;
-//	private String isbn;
-//	private String img;
-//	private int price;
-//	private String url;
-//	private String publisher;
-//	private String contents;
-	//Read 일단 전부 불러오는 기능. (거의 안쓸 것 같긴 한데...)
+
 	public ArrayList<BookDto> getBookAll(){
 		ArrayList<BookDto> list = new ArrayList<>();
 		String sql = "select * from `book`";
@@ -126,6 +116,31 @@ public class BookDao {
 		return list;
 	}
 	
+	public String getImgbyIsbn(String isbn){
+		String img = null;
+		String sql = "select img from `book` where isbn=?";
+		try {
+			this.conn=DBManager.getConnection();
+			this.pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, isbn);
+			this.rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				img = rs.getString(1);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+				pstmt.close();
+				rs.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return img;
+	}
 	
 	//Read ISBN으로 불러오기.
 	public BookDto getBookByIsbn(String isbn) {

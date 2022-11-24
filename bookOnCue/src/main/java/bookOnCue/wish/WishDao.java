@@ -19,7 +19,7 @@ public class WishDao {
 		this.rs = null;
 	}
 
-	public static WishDao instance = new WishDao();
+	private static WishDao instance = new WishDao();
 
 	public static WishDao getInstance() {
 		return instance;
@@ -77,7 +77,7 @@ public class WishDao {
 
 	public ArrayList<WishDto> readAllWishByUser(String user) {
 		ArrayList<WishDto> list = new ArrayList<>();
-		String sql = "Select * from `wish` where user=? ";
+		String sql = "Select * from `wish` where `user`=?";
 
 		try {
 			this.conn = DBManager.getConnection();
@@ -136,7 +136,7 @@ public class WishDao {
 
 	public WishDto getWishByUserIsbn(String user, String isbn) {
 		WishDto wishDto = null;
-		String sql = "Select * from `wish` where user=?, isbn=? ";
+		String sql = "Select * from `wish` where user=? and isbn=? ";
 
 		try {
 			this.conn = DBManager.getConnection();

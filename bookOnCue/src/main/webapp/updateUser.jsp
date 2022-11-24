@@ -8,7 +8,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body>	
+<jsp:include page="header.jsp"/>
+
 	<%
 String id = (String)session.getAttribute("id");
 UserDao userDao = UserDao.getinstance();

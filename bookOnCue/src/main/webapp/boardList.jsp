@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<button onclick="location.href='index.jsp'">메인으로 돌아가기</button>
+	<jsp:include page="header.jsp"/>
 <% 
 	String id = (String)session.getAttribute("id");
     boolean isreview = false;

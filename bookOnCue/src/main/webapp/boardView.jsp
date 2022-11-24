@@ -16,6 +16,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="header.jsp"/>
 <%
 	long no = Long.parseLong(request.getParameter("no"));
 	

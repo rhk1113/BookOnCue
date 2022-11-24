@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="header.jsp"/>
 	<form method="post" action="loginPro.jsp">
 		ID:<input type="text" id="id" name="id"> PW:<input
 			type="password" id="pw" name="pw"> <input type="submit"
