@@ -19,11 +19,11 @@ String id = (String)session.getAttribute("id");
 UserDao userDao = UserDao.getinstance();
 UserDto userDto = userDao.readUserById(id);%>
 
-	<button onclick="location.href='updateUser.jsp'">회원정보수정</button>
-	<button onclick="if(confirm('탈퇴하시겠습니까?'))location.href='deleteUser.jsp'">회원탈퇴</button>
-	<button onclick="location.href='index.jsp'">메인으로 돌아가기</button>
-	<button onclick="location.href='wishList.jsp'">위시리스트</button>
-	<button onclick="location.href='readerBoard.jsp'">나의 독서기록</button>
+	<button onclick="location.href='updateUser'">회원정보수정</button>
+	<button onclick="if(confirm('탈퇴하시겠습니까?'))location.href='deleteUser'">회원탈퇴</button>
+	<button onclick="location.href='index'">메인으로 돌아가기</button>
+	<button onclick="location.href='wishList'">위시리스트</button>
+	<button onclick="location.href='readerBoard'">나의 독서기록</button>
 	<input type= "hidden" class = "curUser" id = "curUser" value=<%=id%>>
 <table border="1px">
 <thead>

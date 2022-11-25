@@ -63,9 +63,9 @@ let user = document.getElementById("curUser").value;
 			work();
 			$(".lists").append(
 				`<ul class = "post${no}">
-					<li><a href="detailBooks.jsp?isbn=${isbn}"><img src=${img}/></li>
-					<li><a href="'detailBooks.jsp?isbn=${isbn}">${title}</a></li>
-					<li><button onclick="location.href='detailBooks.jsp?isbn=${isbn}'">책 보러가기</button></li>
+					<li><a href="detailBooks?isbn=${isbn}"><img src=${img}/></li>
+					<li><a href="'detailBooks?isbn=${isbn}">${title}</a></li>
+					<li><button onclick="location.href='detailBooks?isbn=${isbn}'">책 보러가기</button></li>
 				</ul>`
 			)
 			j++;

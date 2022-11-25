@@ -6,35 +6,51 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
-<body>	
-<jsp:include page="header.jsp"/>
+<body>
 
 	<%
 String id = (String)session.getAttribute("id");
-UserDao userDao = UserDao.getinstance();
-UserDto userDto = userDao.readUserById(id);
+UserDao userDao1 = UserDao.getinstance();
+UserDto userDto1 = userDao1.readUserById(id);
 
 %>
-	<form method="post" action="updateUserPro.jsp">
-		<input type="hidden" id="no" name="no" value="<%=userDto.getId()%>"
-			maxlength="50" readonly> <input type="hidden" id="exPhone"
-			name="exPhone" value="<%=userDto.getPhone()%>" readonly> ID:<input
-			type="text" id="id" name="id" readonly value="<%=userDto.getUser()%>">
-		PW(생성):<input type="password" id="pw1" name="pw1"
-			value="<%=userDto.getPassword()%>"> PW(확인):<input
-			type="password" id="pw2" name="pw2"> name:<input type="text"
-			id="name" name="name" value="<%=userDto.getName()%>"> phone:<input
-			type="text" id="phone1" name="phone1" maxlength="3" placeholder="000"
-			style="color: #aaa">-<input type="text" id="phone2"
-			name="phone2" maxlength="4" placeholder="0000" style="color: #aaa">-<input
-			type="text" id="phone3" name="phone3" maxlength="4"
-			placeholder="0000" style="color: #aaa"> 주소:<input type="text"
-			id="address" name="address" value="<%=userDto.getAddress()%>">
-		닉네임:<input type="text" id="nickname" name="nickname"
-			value="<%=userDto.getNickname()%>"> <input type="submit"
-			value="가입하기">
+	<form class = "editMe" method="post" onsubmit="commitChange()">
+		<input type="hidden" id="curUser" name="curUser" value="<%=id%>" readonly> 
+		<input type="hidden" id="exPw" name="exPw" value="<%=userDto1.getPassword()%>" readonly> 
+		<table>
+		<tr>
+		<td>ID:</td>
+		<td><input type="text" id="id" name="id" readonly value="<%=userDto1.getUser()%>" readonly></td>
+		</tr><tr>
+		<td>PW(기존):</td>
+		<td><input type="password" id="pw" name="pw" value=""> </td>
+		</tr><tr>
+		<td>PW(생성):</td>
+		<td><input type="password" id="pw1" name="pw1" value=""> </td>
+		</tr><tr>
+		<td>PW(확인):</td>
+		<td><input type="password" id="pw2" name="pw2" value=""> </td>
+		</tr><tr>
+		<td>name:</td>
+		<td><input type="text" id="name" name="name" value="<%=userDto1.getName()%>"> </td>
+		</tr><tr>
+		<td>phone:</td>
+		<td><input type="text" id="phone" name="phone" value="<%=userDto1.getPhone()%>" readonly> 
+		</td>
+		</tr><tr>
+		<td>주소:</td>
+		<td><input type="text" id="address" name="address" value="<%=userDto1.getAddress()%>"></td>
+		</tr><tr>
+		<td>닉네임:</td>
+		<td><input type="text" id="nickname" name="nickname" value="<%=userDto1.getNickname()%>"> </td>
+		</tr><tr>
+		<td><input type="button" value="수정하기" onclick = "checkPass()"></td>
+		</tr>
+		</table>
 	</form>
+	<script src = "javaScript/userUpdate.js"></script>
 </body>
 </html>

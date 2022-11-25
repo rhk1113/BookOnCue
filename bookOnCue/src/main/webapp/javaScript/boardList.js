@@ -77,7 +77,7 @@ function getPost(div){
 			$(".posts").append(
 				`<tr class = "reviewContent">
 					<td>${j+1}</td>
-					<td><a href="boardView.jsp?no=${no}">${title}</a></td>
+					<td><a href="boardView?no=${no}">${title}</a></td>
 					<td>${user}</td>
 				</tr>`
 			)

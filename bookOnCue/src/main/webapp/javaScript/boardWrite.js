@@ -56,7 +56,7 @@ function selected(num){
 		console.log(division,document.getElementById('division').value);
 		}else if(admin==="false"){
 			 if(confirm('책 평론을 쓰기 위해 책을 찾으러 갈까요?')) {
-          $(location).attr('href', 'searchBook.jsp?query=오늘의 책');
+          $(location).attr('href', 'searchBook?query=오늘의 책');
       } else {
 		$(".selectbox option:eq(0)").prop("selected", true);
 	document.getElementById('division').value="1";

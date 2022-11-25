@@ -25,7 +25,7 @@ if(list.size()>0){
 </table>
 <%}else{%>
 <div>아직 작성한 서평이 없습니다.</div>
-<button onclick="location.href='searchBook.jsp?query=오늘'">읽을 책 찾으러 가기!</button>
+<button onclick="location.href='searchBook?query=오늘'">읽을 책 찾으러 가기!</button>
 <%} %>
 <script src = "javaScript/readerBoard.js"></script>
 </body>

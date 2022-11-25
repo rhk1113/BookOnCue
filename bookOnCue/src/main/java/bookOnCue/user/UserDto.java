@@ -13,6 +13,17 @@ public class UserDto {
 	private Timestamp regdate;
 	private boolean manager;
 	
+	
+	
+	
+	public UserDto(String password, String name, String address, String nickname) {
+		super();
+		this.password = password;
+		this.name = name;
+		this.address = address;
+		this.nickname = nickname;
+	}
+
 	public UserDto(int id, String user, String password, String name, String phone, String address, String nickname) {
 		super();
 		this.id = id;

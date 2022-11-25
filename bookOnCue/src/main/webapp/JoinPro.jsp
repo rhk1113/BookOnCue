@@ -15,10 +15,10 @@ UserDao userDao = UserDao.getinstance();
 UserDto userDto = null;
 
 request.setCharacterEncoding("UTF-8");
-int no = Integer.parseInt(request.getParameter("no"));
-String id = request.getParameter("id");
-String password = request.getParameter("pw1");
-String name = request.getParameter("name");
+int no = userDao.getMaxId();
+String id = request.getParameter("userID");
+String password = request.getParameter("userPW");
+String name = request.getParameter("userName");
 String nickname = request.getParameter("nickname");
 String address = request.getParameter("address");
 String phone = request.getParameter("phone1")+request.getParameter("phone2")+request.getParameter("phone3");

@@ -12,7 +12,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"/>
-	<form method="post" action="searchBook.jsp">
+	<form method="post" action="searchBook">
 		<input type="text" id="searchbar" name="query" placeholder="오늘의 책은?">
 		<input type="submit" value="검색">
 	</form>

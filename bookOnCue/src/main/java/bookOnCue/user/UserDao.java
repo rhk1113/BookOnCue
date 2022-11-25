@@ -233,36 +233,32 @@ public class UserDao {
 	
 	
 	
-	public void UpdateUserById(UserDto userDto) {
-		String user= userDto.getUser();
+	public void UpdateUserById(UserDto userDto, String user) {
 		String password = userDto.getPassword();
 		String name = userDto.getName();
-		String phone = userDto.getPhone();
 		String address = userDto.getAddress();
 		String nickname = userDto.getNickname();
-		Timestamp regdate = userDto.getRegdate();
-		boolean manager = userDto.isManager();
 
-		String sql = "update user set password = ?, name = ?, phone= ?, address = ?, nickname = ?, regdate = ?, manager = ? where user = ?";
+		String sql = "update `user` set `password` = ?, `name` = ?, address = ?, nickname = ? where `user` = ?";
 		try {
 			this.conn = DBManager.getConnection();
 			this.pstmt = conn.prepareStatement(sql);
 			this.pstmt.setString(1, password);
 			this.pstmt.setString(2, name);
-			this.pstmt.setString(3, phone);
-			this.pstmt.setString(4, address);
-			this.pstmt.setString(5, nickname);
-			this.pstmt.setTimestamp(6, regdate);
-			this.pstmt.setBoolean(7, manager);
-			this.pstmt.setString(8, user);
+			this.pstmt.setString(3, address);
+			this.pstmt.setString(4, nickname);
+			this.pstmt.setString(5, user);
 
 			this.pstmt.execute();
+			System.out.println("유저 압뎃 완료!");
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("유저 압뎃 실패!");
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
