@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.all{
+	margin:30px;
+}
+
+.navigation{
+	justify-content: space-around;
+	display:flex;
+}
+
+.navbtn{
+	padding: 10px 50px;
+    border-radius: 20px;
+    font-size: 16px;
+    background: #343434;
+    color: white;
+    font-weight: 600;
+}
+
+th{
+	line-height: 30px;
+}
+
+td{
+	line-height: 30px;
+}

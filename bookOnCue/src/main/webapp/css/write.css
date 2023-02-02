@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+.all{
+	display:flex;
+	margin:30px;
+	margin-top:15px;
+	text-align:center;
+	justify-content: center;
+	align-content: center;
+	flex-direction: row-reverse;
+}
+
+
+ul{
+	list-style:none;
+	padding-inline-start: 0px;
+
+}
+
+.selectbox{
+	grid-area:select;
+	margin:10px 40px
+}
+
+.bookcheck{
+	margin:20px;
+}
+
+.title{
+		margin:20px;
+}
+
+textarea{
+	width:80%;
+	height:60%;
+}
+
+.bookcontainer{
+	grid-area:book;
+	width: 45%;
+}
+
+#writeAbout{
+	width:45%;
+}
+
+.submit{
+	grid-area:submit;
+	margin:10px 30%;
+	padding: 10px 30px;
+    border-radius: 20px;
+    font-size: 16px;
+    background: #343434;
+    color: white;
+    font-weight: 600;
+
+}

@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+ul{
+	    list-style: none;
+padding-inline-start:0;	
+}
+
+.bookSearch{
+	margin:50px 30px 0 30px;
+}
+.container{
+	grid-template-columns:1fr 1fr 1fr 1fr;
+	grid-template-rows:1fr 1fr 1fr ;
+	display: grid;
+	text-align:center;
+}
+.contained{
+	padding:none;
+	margin:30px 10px 10px;
+}
+
+.nbbutton{
+	
+	text-align:center;
+	margin:30px 10px 10px;	
+	align-items: center;
+	justify-items: center;
+}
+.back_button{
+	font-size: 16px;
+	
+}
+.next_button{
+	font-size: 16px;
+	
+}

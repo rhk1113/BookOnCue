@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+.loginBox{
+	border:solid 2px #aaa;
+	border-radius:15px;
+		justify-content: center;
+	align-content: center;
+	padding:30px;
+	margin:100px 20% 100px 20%;	
+	text-align:center;
+	display:grid;
+	grid-template-columns: 70px 150px 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+    "ih id log"
+    "ph pw log"					;
+}
+
+.loginbtn{
+	grid-area:log;
+	
+}
+
+.login{
+	justify-content: center;
+	align-content: center;
+	padding: 10px 40px;
+    font-size: 16px;
+    background: #343434;
+    color: white;
+    font-weight: 600;
+    text-align:center;
+    border-radius: 20px;
+    margin:10px;
+
+}
+
+#ihead{
+	    margin:10px;
+	
+		grid-area:ih
+}
+#phead{
+    margin:10px;
+	
+	grid-area:ph
+}
+
+#id{
+	    border-radius: 20px;
+    margin:10px;
+	
+		grid-area:id
+}
+
+#pw{
+	    border-radius: 20px;
+    margin:10px;
+	
+		grid-area:pw
+}
+.login{
+		grid-area:log
+}

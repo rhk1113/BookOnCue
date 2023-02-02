@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+.all{
+			margin:20px 30px 0 30px;
+}
+
+.post{
+	font-size :16px;
+}
+.title{
+	margin:20px;
+}
+.user{
+	margin:20px;	
+}
+
+.regdate{
+		margin:20px;
+}
+
+.moddate{
+		margin:20px;
+}
+
+.date{
+		margin:20px 20px;
+}
+
+ul{
+	list-style-type: none;
+	    padding-inline-start: 0;
+}
+.posttext{
+			margin:20px;
+	display:flex;
+	
+}
+.containerview{
+	text-align:center;
+}
+
+.text{
+	display:flex;
+	height:40px;
+	margin-top:15px;
+	text-align:center;
+	justify-content: center;
+	align-content: center;
+}
+.utilbtn{
+	
+	font-size: 14px;
+    border: solid 2px #aaa;
+    border-radius: 10px;
+    padding: 5px 15px;
+    color: #111;
+}
+
+.viewbtn{
+	padding: 10px 50px;
+    border-radius: 20px;
+    font-size: 16px;
+    background: #343434;
+    color: white;
+    font-weight: 600;
+}
+
+.leaveComment{
+	margin:20px;
+	display:flex;
+	justify-content: center;
+	align-content: center;
+	
+}
+
+.owner{
+	display:flex;
+	
+	justify-content: flex-end;
+	align-content: center;
+}
+
+textarea{
+	width:90%
+}
+
+.subbtn{
+	margin:10px;
+	padding: 10px 30px;
+    border-radius: 20px;
+    font-size: 16px;
+    background: #343434;
+    color: white;
+    font-weight: 600;
+}
+
+.EditComment{
+	justify-content: center;
+	align-content: center;
+	
+}
