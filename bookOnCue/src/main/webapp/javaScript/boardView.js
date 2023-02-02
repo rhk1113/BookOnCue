@@ -1,8 +1,8 @@
 let postNo = document.getElementById("postNo").value;
 let curUser = document.getElementById("curUser").value;
 let isManager = document.getElementById("isManager").value;
-let page = 0;
-let lastpage=0;
+let paged = 0;
+let lastpaged=0;
 let text = document.getElementById("commentBox").value;
 $(".EditComment").hide();
 console.log(curUser);
@@ -42,13 +42,13 @@ function getComments(){
 	}).done(function(response){
 		const list =response;
 		console.log("list:",list);
-		lastPage= Math.floor(list.length / 5);
-		if(list.length/5>lastPage){
-			lastPage++;
+		lastpaged= Math.floor(list.length / 5);
+		if(list.length/5>lastpaged){
+			lastpaged++;
 		}
-		console.log(lastPage);
+		console.log(lastpaged);
 		
-		for(let i = 0+page*5 ; i<5+page*5 ; i++){
+		for(let i = 0+paged*5 ; i<5+paged*5 ; i++){
 			if(i==list.length){
 				break;
 			}
@@ -92,32 +92,32 @@ function getComments(){
 		$('.back').hide();
         $('.next').hide();
 
-        if(page!==0){
+        if(paged!==0){
             $('.back').show();
         }
-		console.log("page:",page , "last", lastPage);
-		if(page !== lastPage-1){
+		console.log("paged:",paged , "last", lastpaged);
+		if(paged !== lastpaged-1){
             $('.next').show();
         }
 		
-		if(page === lastPage){
+		if(paged === lastpaged){
             $('.next').hide();
         }
 		
 	});
 }
 
-function pageUp(){
-    if(page!==lastPage-1){
-        page++;
+function pagedUp(){
+    if(paged!==lastpaged-1){
+        paged++;
 		getComments();
         $('.back_button').show();
     }
 }
 
-function pageDown(){
-    if(page > 0){
-        page--;
+function pagedDown(){
+    if(paged > 0){
+        paged--;
         getComments();
     }
 }

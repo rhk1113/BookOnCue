@@ -15,7 +15,6 @@ let isbnshort;
 // 글쓸때 필요한 책제목 이미지 작가 isbn 타이틀 아이디 추란사(최소한의 예의) 줄거리 넣을 필요 없을 것 같은데
 // 줄거리 URL 뺄까...? 
 let curUser = document.getElementById("curUser").value;
-let word = document.getElementById("getisbn").value;
 getDetail(word);
 
 getreview();
@@ -47,15 +46,34 @@ console.log("word:",word);
 			const isbnarr = isbn.split(" ");
 			isbnshort = isbnarr[1]; //13자리 짜리 isbn
 			console.log(isbnshort);
-            $(`.container`).append(
+            $(`.containerDetail`).append(
                 `
-                    <div><a href='${url}'><img src = "${thumbnail}"></a></div>
-                    <div>${title}</div>
-                    <div>${contents}</div>
-                    <div>${author}</div>
-                    <div>${publisher}</div>
-                    <div>${price}</div>
-					<div>${isbn} ${isbnshort}</div>
+<div class="info">
+    <a href='${url}'><img src = "${thumbnail}" class = "bookimg"></a>
+	<table class = "table">
+    <tr>
+        <td class="heads">제목</td>
+        <td>${title}</td>
+    </tr>
+    <tr>
+        <td class="heads">저자</td>
+        <td>${author}</td>
+    </tr>
+    <tr>
+        <td class="heads">출판사</td>
+        <td>${publisher}</td>
+    </tr>
+    <tr>
+        <td class="heads">판매가</td>
+        <td>${price}</td>
+    </tr>
+    <tr>
+        <td class="heads">ISBN</td>
+        <td>${isbnshort}</td>
+    </tr>
+</table>
+</div>
+<div class="about">${contents}</div>
                 `
             );
         });
@@ -66,12 +84,12 @@ console.log("word:",word);
 function gotoWrite(){
 	if(curUser==="null"){
 		alert('로그인이 필요한 서비스입니다!');
-	$(location).attr('href', `login.jsp`);
+	$(location).attr('href', `login`);
 	}else{
 	
 	bookToDB();
 	
-	$(location).attr('href', `BoardWrite.jsp?isbn=${isbnshort}`);
+	$(location).attr('href', `BoardWrite?isbn=${isbnshort}`);
 	}
 }
 
@@ -97,8 +115,8 @@ function bookToDB(){
 
 
 
-let page =0;
-let lastPage =0;
+let detailpage =0;
+let lastdetailpage =0;
 function getreview(){
 	$(".review").empty();
 	let query = $("#getisbn").val();
@@ -111,12 +129,12 @@ function getreview(){
 	}).done(function(response){
 		const list = response;
 		console.log("list:",list);
-		lastPage= Math.floor(list.length / 5);
-		if(list.length/5>lastPage){
-			lastPage++;
+		lastdetailpage= Math.floor(list.length / 5);
+		if(list.length/5>lastdetailpage){
+			lastdetailpage++;
 		}
-		console.log(lastPage);
-		for(let i = 0+page*5 ; i<5+page*5 ; i++){
+		console.log(lastdetailpage);
+		for(let i = 0+detailpage*5 ; i<5+detailpage*5 ; i++){
 			if(i==list.length){
 				break;
 			}
@@ -127,7 +145,7 @@ function getreview(){
 			$(".review").append(
 				`<tr class = "reviewContent">
 					<td>${i+1}</td>
-					<td><a href="boardView.jsp?no=${no}">${title}</a></td>
+					<td><a href="boardView?no=${no}">${title}</a></td>
 					<td>${user}</td>
 				</tr>`
 			)			
@@ -135,27 +153,27 @@ function getreview(){
 		$('.back').hide();
         $('.next').hide();
 
-        if(page!==0){
+        if(detailpage!==0){
             $('.back').show();
         }
-		if(page !== lastPage-1){
+		if(detailpage !== lastdetailpage-1){
             $('.next').show();
         }
 	});
 }
 
-function pageUp(){
-    if(page!==lastPage-1){
+function detailpageUp(){
+    if(detailpage!==lastdetailpage-1){
 
-        page++;
+        detailpage++;
 		getreview();
         $('.back_button').show();
     }
 }
 
-function pageDown(){
-    if(page > 0){
-        page--;
+function detailpageDown(){
+    if(detailpage > 0){
+        detailpage--;
         getreview();
     }
 }

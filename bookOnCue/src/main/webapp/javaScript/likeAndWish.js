@@ -1,7 +1,7 @@
 user = document.getElementById("curUser").value;
 
 
-console.log("받아온거:",isbn);
+
 checkLike()
 work();
 getLikeLength()
@@ -42,6 +42,7 @@ function toggleLike(){
 	checkLike();	
 	work();
 	getLikeLength()
+	
 }
 
 function CDLike(){

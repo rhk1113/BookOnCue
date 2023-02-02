@@ -22,16 +22,16 @@
 			session = request.getSession();
 			session.setAttribute("id", id);
 			session.setAttribute("manager",userDto.isManager());
+			response.sendRedirect("index");
 			System.out.println("세션 저장 완료");
-			response.sendRedirect("index.jsp");
 		}else{
 			System.out.println("세션 저장 실패");
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("login");
 		}
 	}
 	else{
 		System.out.println("사용자를 찾을 수 없습니다");
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("login");
 }%>
 
 </body>

@@ -45,9 +45,9 @@ request.setCharacterEncoding("utf-8");
 	boardDao.updatePost(boardDto, id);
 	System.out.println("게시글 등록 완료");
 	if(division==2){
-	response.sendRedirect("detailBooks.jsp?isbn="+isbn);
+	response.sendRedirect("detailBooks?query="+isbn);
 	}else{
-		response.sendRedirect("boardList.jsp");
+		response.sendRedirect("boardList");
 	}
 	%>
 </body>

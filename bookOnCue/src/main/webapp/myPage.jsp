@@ -8,24 +8,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <link rel="stylesheet" href="css/mypage.css"> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body onload="getPost(2)">
 	<jsp:include page="header.jsp"/>
+	<div class = "all">
+	
 	<%
 String id = (String)session.getAttribute("id");
 UserDao userDao = UserDao.getinstance();
 UserDto userDto = userDao.readUserById(id);%>
-
-	<button onclick="location.href='updateUser'">회원정보수정</button>
-	<button onclick="if(confirm('탈퇴하시겠습니까?'))location.href='deleteUser'">회원탈퇴</button>
-	<button onclick="location.href='index'">메인으로 돌아가기</button>
-	<button onclick="location.href='wishList'">위시리스트</button>
-	<button onclick="location.href='readerBoard'">나의 독서기록</button>
+<div  class = "navigation">
+	<button class="navbtn" onclick="location.href='updateUser'">회원정보수정</button>
+	<button class="navbtn" onclick="if(confirm('탈퇴하시겠습니까?'))location.href='deleteUser'">회원탈퇴</button>
+	<button class="navbtn" onclick="location.href='wishList'">위시리스트</button>
+	<button class="navbtn" onclick="location.href='readerBoard'">나의 독서기록</button>
+</div>
 	<input type= "hidden" class = "curUser" id = "curUser" value=<%=id%>>
-<table border="1px">
+<table border="1px" style="border-collapse: collapse; margin: 30px auto 30px auto ">
 <thead>
 	<tr>
 		<th>이름</th>
@@ -64,6 +67,9 @@ if(list.size()>0){
 <%} %>
 
 
+	</div>
+		<jsp:include page="footer.jsp"/>
+	
 <script src = "javaScript/mypage.js"></script>
 </body>
 </html>

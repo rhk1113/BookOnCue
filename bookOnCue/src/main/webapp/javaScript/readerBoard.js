@@ -1,6 +1,6 @@
-let user = document.getElementById("curUser").value;
-let page =0;
-let lastPage=0;
+let user1 = document.getElementById("curUser").value;
+let rpage =0;
+let lastrpage=0;
 
 function getImg(isbn){
 	let arr;
@@ -31,21 +31,21 @@ function getPost(){
 		method:"POST",
 		url:"/bookOnCue/GetUserPostAction",
 		data:{
-			user:user
+			user:user1
 		}
 		}).done(function(response){
 		const list = response;
 		console.log("list:",list);
-		lastPage= Math.floor(list.length / 10);
+		lastrpage= Math.floor(list.length / 10);
 		
 			
-		if(list.length/10>lastPage){
-			lastPage++;
+		if(list.length/10>lastrpage){
+			lastrpage++;
 		}
-		console.log(lastPage);
-		let j = page*10;
+		console.log(lastrpage);
+		let j = rpage*10;
 		let posts = 0;
-		for(let i = 0+page*10 ; ; i++){
+		for(let i = 0+rpage*10 ; ; i++){
 			if(i==list.length){
 				flag=true;
 				break;
@@ -61,9 +61,9 @@ function getPost(){
 				work();
 			$(".written").append(
 				`<ul class = "post${no}">
-					<li><a href="boardView.jsp?no=${no}"><img src=${img}/></li>
-					<li><a href="boardView.jsp?no=${no}">${title}</a></li>
-					<li><button onclick="location.href='detailBooks.jsp?isbn=${isbn}'">책 보러가기</button></li>
+					<li><a href="boardView?no=${no}"><img src=${img}/></li>
+					<li><a href="boardView?no=${no}">${title}</a></li>
+					<li><button onclick="location.href='detailBooks?query=${isbn}'">책 보러가기</button></li>
 				</ul>`
 			)
 			j++;
@@ -77,12 +77,12 @@ function getPost(){
 		$('.back').hide();
         $('.next').hide();
 
-        if(page!==0){
+        if(rpage!==0){
             $('.back').show();
         }
 		console.log(flag);
 		
-		if(page !== lastPage-1){
+		if(rpage !== lastrpage-1){
 			
             $('.next').show();
         }

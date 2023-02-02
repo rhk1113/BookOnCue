@@ -1,6 +1,6 @@
 user = document.getElementById("curUser").value;
-let page =0;
-let lastPage=0;
+let mpage =0;
+let lastmpage=0;
 
 function getPost(div){
 
@@ -26,16 +26,16 @@ function getPost(div){
 		}).done(function(response){
 		const list = response;
 		console.log("list:",list);
-		lastPage= Math.floor(list.length / 10);
+		lastmpage= Math.floor(list.length / 10);
 		
 			
-		if(list.length/10>lastPage){
-			lastPage++;
+		if(list.length/10>lastmpage){
+			lastmpage++;
 		}
-		console.log(lastPage);
-		let j = page*10;
+		console.log(lastmpage);
+		let j = mpage*10;
 		let posts = 0;
-		for(let i = 0+page*10 ; ; i++){
+		for(let i = 0+mpage*10 ; ; i++){
 			if(i==list.length){
 				flag=true;
 				break;
@@ -63,12 +63,12 @@ function getPost(div){
 		$('.back').hide();
         $('.next').hide();
 
-        if(page!==0){
+        if(mpage!==0){
             $('.back').show();
         }
 		console.log(flag);
 		
-		if(page !== lastPage-1){
+		if(mpage !== lastmpage-1){
 			
             $('.next').show();
         }

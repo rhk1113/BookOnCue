@@ -8,11 +8,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="css/cList.css">
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"/>
+	<div class = "cList">
 <% 
 	String id = (String)session.getAttribute("id");
     boolean isreview = false;
@@ -29,29 +31,31 @@
         
     %>
 <div class = "navigation">
-<button onclick="div1()">전체</button>
-<button onclick="div2()">공지사항</button>
-<button onclick="div3()">커뮤니티</button>
-<button onclick="div4()">서평 모아보기</button>
+<button onclick="divC1()" class="navbtn">전체</button>
+<button onclick="divC2()" class="navbtn">공지사항</button>
+<button onclick="divC3()" class="navbtn">커뮤니티</button>
+<button onclick="divC4()" class="navbtn">서평 모아보기</button>
 </div>
-<table>
+<table class ="posttable">
 <thead>
 </thead>
 <tbody>
 				<% int i=1;
     //해당 책 관련 공지사항들 먼저 출력 3줄만 무조건 최근거 3개만 
     if(anounce.size()>0){
-    	for(int j=0; j<3; j++){ %>
+    	for(int j=0; j<3; j++){ 
+    	    	String srt = String.valueOf(anounce.get(j).getStrdate()).split(" ")[0];
+    	String end = String.valueOf(anounce.get(j).getEnddate()).split(" ")[0];%>
 				<tr>
-					<td><%=i%></td>
-					<td><a href="boardView.jsp?no=<%=anounce.get(j).getNo()%>"><%=anounce.get(j).getTitle()%></a>
+					<td>§</td>
+					<td><a href="boardView?no=<%=anounce.get(j).getNo()%>"><%=anounce.get(j).getTitle()%></a>
 					</td>
 					<td><%=anounce.get(j).getUser()%>
 					</td>
 					<%if(anounce.get(j).getDivision()==6||anounce.get(j).getDivision()==4){%>
-					<td><%=anounce.get(j).getStrdate()%>
+					<td class ="date"><%=srt%>
 					</td>
-					<td><%=anounce.get(j).getEnddate()%>
+					<td class ="date"><%=end%>
 					</td>
 						<% }else{%>
 					<td></td>				
@@ -66,11 +70,17 @@
 </tbody>
 <tbody class = "posts"></tbody>
 </table>
+<div class="floor">
 <% if (id!=null){ %>
-	<button onclick="location.href='BoardWrite.jsp'">글쓰러가기</button>
+	<button onclick="location.href='BoardWrite'" class = "gowrite">글쓰러가기</button>
 	<%} %>
-	<input type=button onclick="pageDown()" value="back" class = "back"> 
-		<input type=button onclick="pageUp()" value="next" class = "next">
+	<div class ="nbbutton">
+		<input type=button onclick="CpageDown()" value="back" class = "back"> 
+		<input type=button onclick="CpageUp()" value="next" class = "next">
+	</div>
+</div>
+</div>
 <script src="javaScript/boardList.js"></script>
+	<jsp:include page="footer.jsp"/>
 </body>
 </html>

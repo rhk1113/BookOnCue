@@ -2,6 +2,7 @@ const container = document.querySelector(".container");
 
 
 
+
 let page = 1;
 let is_End = false;
 let word = "오늘의 책"
@@ -40,17 +41,13 @@ console.log(word);
 			const isbnshort = isbnarr[1];
 			console.log(isbnshort);
             $(`.container`).append(
-                `<tr>
-                    <td><a href='detailBooks.jsp?isbn=${isbnshort}'><img src = "${thumbnail}"></a></td>
-                    <td>${title}</td>
-                    <td>${contents}</td>
-                    <td>${author}</td>
-                    <td>${publisher}</td>
-                    <td>${price}</td>
-					<td>${isbnshort}</td>
-                </tr>`
+                `<ul class="contained">
+                    <li><a href='detailBooks?query=${isbnshort}'><img src = "${thumbnail}"></a></li>
+                    <li>${title}</li>
+                    <li>저자:		${author}</li>
+                    <li>출판사:	${publisher}</li>
+                </ul>`
             );
-
 
         });
         is_End = response.meta.is_end;

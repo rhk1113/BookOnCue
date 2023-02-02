@@ -1,50 +1,50 @@
-let div = 1;
-let page =0;
-let lastPage=0;
+let divC = 1;
+let Cpage =0;
+let lastCpage=0;
 let flag = false;
-getPost(div);
+getPost(divC);
 
-function div1(){
-	page=0;
+function divC1(){
+	Cpage=0;
 		flag=false;
-div=1;
-getPost(div);	
+divC=1;
+getPost(divC);	
 }
-function div2(){
-	page=0;
+function divC2(){
+	Cpage=0;
 		flag=false;
-	div=2;
-getPost(div);	
+	divC=2;
+getPost(divC);	
 }
-function div3(){
-	page=0;
+function divC3(){
+	Cpage=0;
 		flag=false;
-	div=3;
-getPost(div);	
+	divC=3;
+getPost(divC);	
 }
-function div4(){
-	page=0;
+function divC4(){
+	Cpage=0;
 		flag=false;
-	div=4;
-getPost(div);	
+	divC=4;
+getPost(divC);	
 }
 
 
-function getPost(div){
+function getPost(divC){
 
 	flag=false;
 	let min=0;
 	let max=7;
-	if(div===1){
+	if(divC===1){
 		min=0;
 		max=7;		
-	}else if(div===2){
+	}else if(divC===2){
 		min=2;
 		max=8;
-	}else if (div===3){
+	}else if (divC===3){
 		min=0;
 		max=2;
-	}else if (div===4){
+	}else if (divC===4){
 		min=1;
 		max=3;
 	}
@@ -55,16 +55,16 @@ function getPost(div){
 		}).done(function(response){
 		const list = response;
 		console.log("list:",list);
-		lastPage= Math.floor(list.length / 10);
+		lastCpage= Math.floor(list.length / 10);
 		
 			
-		if(list.length/10>lastPage){
-			lastPage++;
+		if(list.length/10>lastCpage){
+			lastCpage++;
 		}
-		console.log(lastPage);
-		let j = page*10;
+		console.log(lastCpage);
+		let j = Cpage*10;
 		let posts = 0;
-		for(let i = 0+page*10 ; ; i++){
+		for(let i = 0+Cpage*10 ; ; i++){
 			if(i==list.length){
 				flag=true;
 				break;
@@ -72,8 +72,8 @@ function getPost(div){
 			const no = list[i].no;
 			const title = list[i].title;
 			const user= list[i].user;
-			const div=parseInt(list[i].division);
-			if(min<div&&max>div){				
+			const divC=parseInt(list[i].division);
+			if(min<divC&&max>divC){				
 			$(".posts").append(
 				`<tr class = "reviewContent">
 					<td>${j+1}</td>
@@ -92,12 +92,12 @@ function getPost(div){
 		$('.back').hide();
         $('.next').hide();
 
-        if(page!==0){
+        if(Cpage!==0){
             $('.back').show();
         }
 		console.log(flag);
 		
-		if(page !== lastPage-1){
+		if(Cpage !== lastCpage-1){
 			
             $('.next').show();
         }
@@ -108,18 +108,18 @@ function getPost(div){
 	});
 }
 
-function pageUp(){
-    if(page!==lastPage-1){
+function CpageUp(){
+    if(Cpage!==lastCpage-1){
 
-        page++;
-		getPost(div)
+        Cpage++;
+		getPost(divC)
         $('.back_button').show();
     }
 }
 
-function pageDown(){
-    if(page > 0){
-        page--;
-		getPost(div)
+function CpageDown(){
+    if(Cpage > 0){
+        Cpage--;
+		getPost(divC)
     }
 }

@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="css/join.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -15,39 +16,37 @@
 	<jsp:include page="header.jsp"/>
 
     <form id = "loginForm" action = "JoinPro.jsp">
-        <table>
+        <table class = "table">
         <tr>
             <td>아이디*</td>
-            <td><input type="text" name="userID" id="userID" required class = "userID"></td>
-            <td><button onclick="checkid()">중복 확인</button></td>
+            <td class="t2"><input type="text" name="userID" id="userID" required class = "userID"></td>
+            <td><button onclick="checkid()" class ="idCheck">중복 확인</button></td>
         </tr>
         <tr>
             <td>비밀번호*</td>
-            <td><input type="password" name="userPW" id="userPW" required></td>
+            <td class="t2"><input type="password" name="userPW" id="userPW" required></td>
         </tr>
         <tr>
             <td>비밀번호 확인*</td>
-            <td><input type="password" name="pwCheck" id="pwCheck" required></td>
+            <td class="t2"><input type="password" name="pwCheck" id="pwCheck" required></td>
         </tr>
         <tr>
             <td>이름*</td>
-            <td><input type="text" name ="userName" required></td>
+            <td class="t2"><input type="text" name ="userName" required></td>
         </tr>
         <tr>
             <td>전화번호*</td>
-            <td><input type="text" name = "phone1" required maxlength="3" placeholder="000">-
-                <input type="text" name = "phone2" required maxlength="4" placeholder="0000">-
-                <input type="text" name = "phone3" required maxlength="4" placeholder="0000"></td>
+            <td class="t2"><input type="text" class = "phone" name = "phone1" required maxlength="3" placeholder="000">-
+                <input type="text" class = "phone" name = "phone2" required maxlength="4" placeholder="0000">-
+                <input type="text" class = "phone" name = "phone3" required maxlength="4" placeholder="0000"></td>
         </tr>
         <tr>
             <td>주소</td>
-            <td><input type="text" name ="address"></td>
+            <td class="t2"><input type="text" name ="address"></td>
         </tr>
         <tr>
             <td>닉네임</td>
-            <td><input type="text" name = "nickname"></td>
-        </tr>
-        <tr>
+            <td class="t2"><input type="text" name = "nickname"></td>
         <td><input type="submit" id="loginSubmit" value="가입 하기"></td>
         </tr>
     </table>

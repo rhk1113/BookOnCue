@@ -1,5 +1,5 @@
-let page =0;
-let lastPage=0;
+let wpage =0;
+let lastwpage=0;
 getPost();
 
 
@@ -39,15 +39,15 @@ let user = document.getElementById("curUser").value;
 		}
 		}).done(function(response){
 		const list = response;
-		lastPage= Math.floor(list.length / 10);
+		lastwpage= Math.floor(list.length / 10);
 		
-		if(list.length/10>lastPage){
-			lastPage++;
+		if(list.length/10>lastwpage){
+			lastwpage++;
 		}
-		console.log(lastPage);
-		let j = page*12;
+		console.log(lastwpage);
+		let j = wpage*12;
 		let posts = 0;
-		for(let i = 0+page*12 ; ; i++){
+		for(let i = 0+wpage*12 ; ; i++){
 			if(i==list.length){
 				flag=true;
 				break;
@@ -63,9 +63,9 @@ let user = document.getElementById("curUser").value;
 			work();
 			$(".lists").append(
 				`<ul class = "post${no}">
-					<li><a href="detailBooks?isbn=${isbn}"><img src=${img}/></li>
-					<li><a href="'detailBooks?isbn=${isbn}">${title}</a></li>
-					<li><button onclick="location.href='detailBooks?isbn=${isbn}'">책 보러가기</button></li>
+					<li><a href="detailBooks?query=${isbn}"><img src=${img}/></li>
+					<li><a href="detailBooks?query=${isbn}">${title}</a></li>
+					<li><button onclick="location.href='detailBooks?query=${isbn}'">책 보러가기</button></li>
 				</ul>`
 			)
 			j++;
@@ -78,12 +78,12 @@ let user = document.getElementById("curUser").value;
 		$('.back').hide();
         $('.next').hide();
 
-        if(page!==0){
+        if(wpage!==0){
             $('.back').show();
         }
 		console.log(flag);
 		
-		if(page !== lastPage-1){
+		if(wpage !== lastwpage-1){
 			
             $('.next').show();
         }

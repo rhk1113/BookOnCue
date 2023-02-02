@@ -9,7 +9,7 @@ let division=1;
 let admin = document.getElementById("admin").value;
 let id = document.getElementById("user").value;
 console.log(admin);
-//이벤트 날짜 자구 떠있네 ㅠ 숨겨
+
 eventDateOff();
 if(admin==="true"){
 	console.log("관리자확인!");
@@ -49,13 +49,13 @@ function selected(num){
 		if(isisbn==="true"){
 		$("input:checkbox[id='bookcheck']").prop("checked", true);
 				document.getElementById('isbook').value = "true";
-				$(`.container`).show();
+				$(`.bookcontainer`).show();
 		eventDateOff();
 		division=2;
 		document.getElementById('division').value = getdiv();
 		console.log(division,document.getElementById('division').value);
-		}else if(admin==="false"){
-			 if(confirm('책 평론을 쓰기 위해 책을 찾으러 갈까요?')) {
+		}else if(isisbn==="false"){
+			 if(confirm('서평을 쓰기 위해 책을 찾으러 갈까요?')) {
           $(location).attr('href', 'searchBook?query=오늘의 책');
       } else {
 		$(".selectbox option:eq(0)").prop("selected", true);
@@ -65,14 +65,14 @@ function selected(num){
 		}
 	}else if (num=="3"){
 		$("input:checkbox[id='bookcheck']").prop("checked", false);
-				$(`.container`).hide();
+				$(`.bookcontainer`).hide();
 		eventDateOff();
 		division=3;
 		document.getElementById('division').value = getdiv();
 		console.log(division,document.getElementById('division').value);
 	}else if(num=="4"){
 				$("input:checkbox[id='bookcheck']").prop("checked", false);
-						$(`.container`).hide();
+						$(`.bookcontainer`).hide();
 		eventDateOn();
 		division=4;
 		document.getElementById('division').value = getdiv();
@@ -114,25 +114,20 @@ function getdiv(){
 
 function eventbook(event) {
 	if (event.target.checked) {
-		$(`.container`).show();
+		$(`.bookcontainer`).show();
 		document.getElementById('isbook').value = "true";
-		console.log(division,document.getElementById('division').value,document.getElementById('isbook').value)
 		if (division >= 3) {
 			division += 2;
-			console.log(division);
 			let title = document.getElementById("postTitle").value;
 			let text = document.getElementById("postText").value;
 			document.getElementById('division').value = getdiv();
-			console.log(division,document.getElementById('division').value,document.getElementById('isbook').value)
 		}
 	} else {
-		$(`.container`).hide();
+		$(`.bookcontainer`).hide();
 		document.getElementById('isbook').value = "false";
-		console.log(division,document.getElementById('division').value,document.getElementById('isbook').value)
 		if (division >= 5) {
 			division -= 2;
 			document.getElementById('division').value = getdiv();
-			console.log(division,document.getElementById('division').value,document.getElementById('isbook').value);
 		}
 	}
 }

@@ -6,18 +6,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<title>Insert title here</title>
+
+<title>Book on Cue</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"/>
-	<form method="post" action="searchBook">
-		<input type="text" id="searchbar" name="query" placeholder="오늘의 책은?">
-		<input type="submit" value="검색">
-	</form>
+
+<img src = "https://s3.amazonaws.com/files.d20.io/images/315913990/wtCAkZs58J5u4KO67FxBUA/max.png" style="width: 90%">
 	
 	<jsp:include page="footer.jsp"/>
-	<script src="javaScript/searchBook.js"></script>
+
 </body>
 </html>

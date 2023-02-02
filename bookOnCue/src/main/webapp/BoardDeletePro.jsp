@@ -18,7 +18,7 @@ request.setCharacterEncoding("utf-8");
 	
 	boardDao.deletePost(id);
 	System.out.println("게시글 등록 완료");
-	response.sendRedirect("boardList.jsp");
+	response.sendRedirect("boardList");
 %>
 </body>
 </html>

@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="css/postView.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <meta charset="UTF-8">
@@ -17,7 +18,8 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"/>
-<%
+	<div class = "all">
+	<%
 	long no = Long.parseLong(request.getParameter("no"));
 	
 	BoardDao boardDao = BoardDao.getInstance();
@@ -28,23 +30,27 @@
 	
 	UserDao userDao = UserDao.getinstance();
 	UserDto	userDto = userDao.readUserById(id);
-	
+	String str = String.valueOf(boardDto.getStrdate()).split(" ")[0];
+	String end = String.valueOf(boardDto.getEnddate()).split(" ")[0];
 %>
-<div>
-<div><%=boardDto.getTitle()%></div>
-<div><%=boardDto.getUser()%></div>
-<div><%=boardDto.getRegdate()%></div>
+<div class = "post">
+<div class = "title">제목 | <%=boardDto.getTitle()%></div>
+<div class = "user">작성자 | <%=boardDto.getUser()%></div>
+<div class = "regdate">게시일 | <%=boardDto.getRegdate()%></div>
 <% if(!boardDto.getModdate().equals(boardDto.getRegdate())){%>
-<div><%=boardDto.getModdate()%></div>
+<div class = "moddate">수정일 | <%=boardDto.getModdate()%></div>
 <%}%>
 <% if(boardDto.getDivision()==6||boardDto.getDivision()==4){%>
-<div class = "div6">
-<div><%=boardDto.getStrdate()%></div>
-<div><%=boardDto.getEnddate()%></div>
+<div class = "date">
+<span>이벤트 기간 | </span>
+<span><%=str%></span>
+<span>~</span>
+<span><%=end%></span>
 </div>
 <%}%> 
+<div class = "posttext">
 <% if(boardDto.getDivision()==2||boardDto.isIsbook()){%>
-<div class="container">
+<div class="containerview">
 		<ul>
 			<li><img src="<%=bookDto.getImg()%>"></li>
 			<li><%=bookDto.getTitle() %></li>
@@ -52,15 +58,23 @@
 		</ul>
 	</div>
 <%}%>
-<div><%=boardDto.getText()%></div>
+<div class = "text"><%=boardDto.getText()%></div>
+</div>
 
 </div>
-<%if(boardDto.getUser().equals(id)||userDto.isManager()){%>
-		<button onclick = "location.href='BoardEdit.jsp?no=<%=no%>'">수정하기</button>
-		<button onclick = "location.href='BoardDeletePro.jsp?no=<%=no%>'">삭제하기</button>
+
+
+<%
+if(userDto!=null){
+if(boardDto.getUser().equals(id)||userDto.isManager()){%>
+<div class = "owner">
+		<button class ="utilbtn" onclick = "location.href='BoardEdit?no=<%=no%>'">수정하기</button>   
+		<button class ="utilbtn" onclick = "location.href='BoardDeletePro.jsp?no=<%=no%>'">삭제하기</button>
+</div>
 <%}
 	boolean manager=false;
-if(id!="null"){manager = userDto.isManager();}%>
+if(id!="null"){manager = userDto.isManager();
+}%>
 
 
 <form method="post" class = "leaveComment">
@@ -68,13 +82,13 @@ if(id!="null"){manager = userDto.isManager();}%>
 	<input type="hidden" value = "<%=no %>" class = "postNo" id = "postNo">
 	<input type="hidden" value="<%=id %>" id="curUser">
 	<textarea id ="commentBox"></textarea>
-	<input type="submit" onclick = "commentUp()">
+	<input class ="subbtn" type="submit" onclick = "commentUp()">
 </form>
 <form method="post"class = "EditComment">
 	<input type = "hidden" value = "<%=manager%>" id = "isManager">
 	<input type="hidden" value = "<%=no%>" class = "postNo" id = "postNo">
 	<input type="hidden" value="<%=id %>" id="curUser">
-	<input type="submit" onclick = "commentEdit()">
+	<input class ="subbtn" type="submit" onclick = "commentEdit()">
 </form>
 <div class = "comments"></div>
 <input type=button onclick="pageDown()" value="back" class = "back"> 
@@ -82,11 +96,14 @@ if(id!="null"){manager = userDto.isManager();}%>
 
 
 
-<button onClick="location.href='boardList.jsp'">커뮤니티 가기</button>
+<button class = "viewbtn" onClick="location.href='boardList'">커뮤니티 가기</button>
 
-<% if(boardDto.getDivision()==2||boardDto.isIsbook()){%>
-<button onClick="location.href='detailBooks.jsp?isbn=<%=boardDto.getIsbn()%>'">다른 서평 보러가기</button>
+<%} if(boardDto.getDivision()==2||boardDto.isIsbook()){%>
+<button class = "viewbtn" onClick="location.href='detailBooks?query=<%=boardDto.getIsbn()%>'">다른 서평 보러가기</button>
 <%} %>
+</div>
 <script src ="javaScript/boardView.js"></script>
+
+		<jsp:include page="footer.jsp"/>
 </body>
 </html>
